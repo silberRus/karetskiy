@@ -13,6 +13,6 @@ public class Calculate{
 	* @param arg - arg
 	*/
 	public static void main(String[] args) {
-		System.out.println("Hello World!");
+		System.out.println("Hello World");
 	}
 }
