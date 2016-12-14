@@ -15,13 +15,11 @@ import static org.junit.Assert.assertThat;
 */
 
 public class CalculateTest {
-	/*
+	/**
 	* Test add.
 	*/
-	
 	@Test
 	public void whenAddOneToOneThenTwo() {
-		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		System.setOut(new PrintStream(out));
 		Calculate.main(null);
