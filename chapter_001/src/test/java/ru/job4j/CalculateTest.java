@@ -14,7 +14,7 @@ import static org.junit.Assert.assertThat;
 public class CalculateTest {
 
 	/**
-	* Test сложения.
+	* Test СЃР»РѕР¶РµРЅРёСЏ.
 	*/
 	@Test
 	public void whenAddTwoToFourThenSix() {
@@ -27,7 +27,7 @@ public class CalculateTest {
 	}
 
 	/**
-	* Test вычитания.
+	* Test РІС‹С‡РёС‚Р°РЅРёСЏ.
 	*/
 	@Test
 	public void whenSubstructSevenToTwoThenFive() {
@@ -40,7 +40,7 @@ public class CalculateTest {
 	}
 
 	/**
-	* Test деления.
+	* Test РґРµР»РµРЅРёСЏ.
 	*/
 	@Test
 	public void whenDivFourToTwoThenTwo() {
@@ -53,7 +53,7 @@ public class CalculateTest {
 	}
 
 	/**
-	* Test умножения.
+	* Test СѓРјРЅРѕР¶РµРЅРёСЏ.
 	*/
 	@Test
 	public void whenMultipleFourToTwoThenEight() {
