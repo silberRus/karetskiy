@@ -33,7 +33,7 @@ public class Point {
 
 		//calculate distance between two points
 
-		return Math.sqrt((Math.pow(point.x, 2) - Math.pow(this.x, 2)) - (Math.pow(point.y, 2) - Math.pow(this.y, 2)));
+		return Math.sqrt(Math.abs(Math.pow(point.x - this.x, 2)) + Math.abs(Math.pow(point.y - this.y, 2)));
 	}
 }
 
