@@ -3,8 +3,8 @@ package ru.job4j;
 /**
 * Class Класс треугольника.
 * @author karetskiy
-* @since 28.12.2016
-* @version 1
+* @since 30.12.2016
+* @version 2
 */
 public class Triangle {
 
@@ -34,12 +34,12 @@ public class Triangle {
 
 		//calculate the triangle area
 
-		double abDistance = this.a.distanceTo(this.b);
-		double bcDistance = this.b.distanceTo(this.c);
-		double caDistance = this.c.distanceTo(this.a);
+		double ab = this.a.distanceTo(this.b);
+		double bc = this.b.distanceTo(this.c);
+		double ca = this.c.distanceTo(this.a);
 
-		double perimetr = (abDistance + bcDistance + caDistance) / 2;
+		double p = (ab + bc + ca) / 2;
 
-		return Math.sqrt(perimetr * (perimetr - abDistance) * (perimetr - bcDistance) * (perimetr - caDistance));
+		return ab < bc + ca && bc < ab + ca && ca < ab + bc ? Math.sqrt(p * (p - ab) * (p - bc) * (p - ca)) : 0;
 	}
 }
