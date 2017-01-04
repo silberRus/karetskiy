@@ -27,6 +27,18 @@ public class Triangle {
 	}
 
 	/**
+	* Проверяем возможность существоавания треуголника по длинам сторон.
+	* @param ab - длина 1
+	* @param bc - длина 2
+	* @param ca - длина 3
+	* @return возможность существования треугольника:
+	*/
+	private boolean exist(double ab, double bc, double ca) {
+
+		return ab < bc + ca && bc < ab + ca && ca < ab + bc;
+	}
+
+	/**
 	* Вычисляет площадь треугольника.
 	* @return result – площадь треугольника:
 	*/
@@ -40,6 +52,10 @@ public class Triangle {
 
 		double p = (ab + bc + ca) / 2;
 
-		return ab < bc + ca && bc < ab + ca && ca < ab + bc ? Math.sqrt(p * (p - ab) * (p - bc) * (p - ca)) : 0;
+		if (exist(ab, bc, ca)) {
+			return Math.sqrt(p * (p - ab) * (p - bc) * (p - ca));
+		} else {
+			return 0;
+		}
 	}
 }
