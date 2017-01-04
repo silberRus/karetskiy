@@ -46,4 +46,22 @@ public class MaxTest {
 
 		assertThat(result, is(area));
 	}
+
+	/**
+	* Вычисляем максимум.
+	* правильный ответ: 3
+	*/
+	@Test
+	public void whenOneThreeAndTwoThenThree() {
+
+		int first 	= 1;
+		int second 	= 3;
+		int third 	= 2;
+
+		Max max = new Max();
+		int result = max.max(first, second, third);
+		final int area = 3;
+
+		assertThat(result, is(area));
+	}
 }
