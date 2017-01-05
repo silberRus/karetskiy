@@ -29,4 +29,20 @@ public class CounterTest {
 
 		assertThat(result, is(area));
 	}
+
+	/**
+	* Вычисляем факториал 5.
+	* правильный ответ: 120
+	*/
+	@Test
+	public void fctorialFiveIsOneHundredAndTwenty() {
+
+		int first 	= 5;
+
+		Counter count = new Counter();
+		int result = count.factorial(first);
+		final int area = 120;
+
+		assertThat(result, is(area));
+	}
 }

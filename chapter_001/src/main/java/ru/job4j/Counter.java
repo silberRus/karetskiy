@@ -24,4 +24,18 @@ public class Counter {
 		}
 	return sum;
 	}
+
+	/**
+	* Вычисляет факториал числа.
+	* @param start - число факториал которого вычисляется
+	* @return result – факториал переданного числа:
+	*/
+	public int factorial(int start) {
+
+	int result = 1;
+	for (int inc = 1; inc <= start; inc++) {
+		result *= inc;
+		}
+	return result;
+	}
 }
