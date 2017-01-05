@@ -16,13 +16,14 @@ public class Turn {
 	public int[] back(int[] array) {
 
 		int size = array.length;
+		int back = size - 1;
 
-		for (int ind = 0; ind < size; ind++) {
+		for (int front = 0; front < size / 2; front++, back--) {
 
-			int buffer = array[ind];
+			int buffer = array[front];
 
-			array[ind] 				= array[size - ind - 1];
-			array[size - ind - 1] 	= buffer;
+			array[front] = array[back];
+			array[back] = buffer;
 		}
 		return array;
 	}
