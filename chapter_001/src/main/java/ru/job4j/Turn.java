@@ -1,12 +1,33 @@
 package ru.job4j;
 
+import java.util.Arrays;
+
 /**
 * Class массивов.
 * @author karetskiy
-* @since 07.01.2017
-* @version 3
+* @since 08.01.2017
+* @version 4
 */
 public class Turn {
+
+	/**
+	* Убираем дубликаты из массива.
+	* @param array - массив в котором надо убрать дуюликаты.
+	* @return массив без дубликатов:
+	*/
+	public String[] removeDublicates(String[] array) {
+
+		String[] newArray = new String[array.length];
+		int ind = 0;
+
+		for (String value: array) {
+			if (!valuePresent(newArray, value)) {
+				newArray[ind] = value;
+				ind++;
+			}
+		}
+		return Arrays.copyOf(newArray, ind);
+	}
 
 	/**
 	* Поварачиваем квадратный массив на 90 градусов.
@@ -95,5 +116,21 @@ public class Turn {
 		} else {
 			return false;
 		}
+	}
+
+	/**
+	* Проверяет есть или нет значение в массие.
+	* @param array - массив
+	* @param value - значение которое проверяется в массиве
+	* @return истина если значение есть:
+	*/
+	private boolean valuePresent(String[] array, String value) {
+
+		for (String cell: array) {
+			if (cell != null && cell.equals(value)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

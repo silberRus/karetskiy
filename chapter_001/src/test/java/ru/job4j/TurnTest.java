@@ -8,8 +8,8 @@ import static org.junit.Assert.assertThat;
 * Test.
 *
 * @author Karetskiy
-* @version 3
-* @since 07.01.2017
+* @version 4
+* @since 08.01.2017
 */
 public class TurnTest {
 
@@ -62,5 +62,20 @@ public class TurnTest {
 		final int[][] expectArray = {{3, 2, 1}, {3, 2, 1}, {3, 2, 1}};
 
 		assertThat(resultArray, is(expectArray));
+	}
+
+	/**
+	* Проверяем создание уникального массива.
+	* правильный ответ: {"солнце", "мать", "береза", "лошадь"}
+	*/
+	@Test
+	public void removeDublicatesFromStrings() {
+
+		Turn turn = new Turn();
+
+		final String[] array = {"солнце", "мать", "береза", "лошадь", "мать", "лошадь", "солнце", "мать"};
+		final String[] expectArray = {"солнце", "мать", "береза", "лошадь"};
+
+		assertThat(turn.removeDublicates(array), is(expectArray));
 	}
 }
