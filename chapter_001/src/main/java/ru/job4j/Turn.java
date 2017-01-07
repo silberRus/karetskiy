@@ -4,9 +4,28 @@ package ru.job4j;
 * Class массивов.
 * @author karetskiy
 * @since 07.01.2017
-* @version 2
+* @version 3
 */
 public class Turn {
+
+	/**
+	* Поварачиваем квадратный массив на 90 градусов.
+	* @param array - 2D массив который надо повернуть
+	* @return отсортированный массив:
+	*/
+	public int[][] rotate90R(int[][] array) {
+
+		int size = array[0].length;
+		int[][] newArray = new int[size][size];
+
+		for (int y = 0; y < size; y++) {
+			for (int x = 0; x < size; x++) {
+
+				newArray[x][y] = array[x][size - y - 1];
+			}
+		}
+		return newArray;
+	}
 
 	/**
 	* Сортируем массив методом пузырька.

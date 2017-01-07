@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 * Test.
 *
 * @author Karetskiy
-* @version 2
+* @version 3
 * @since 07.01.2017
 */
 public class TurnTest {
@@ -41,6 +41,25 @@ public class TurnTest {
 		Turn turn = new Turn();
 		int[] resultArray = turn.getSorting(array);
 		final int[] expectArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+		assertThat(resultArray, is(expectArray));
+	}
+
+	/**
+	* Проверяем поворот массива на 90 градусов вправо.
+	* правильный ответ:
+	*	{3, 2, 1}
+	*	{3, 2, 1}
+	*	{3, 2, 1}
+	*/
+	@Test
+	public void rotate90R() {
+
+		int[][] array = {{1, 2, 3}, {1, 2, 3}, {1, 2, 3}};
+
+		Turn turn = new Turn();
+		int[][] resultArray = turn.rotate90R(array);
+		final int[][] expectArray = {{3, 2, 1}, {3, 2, 1}, {3, 2, 1}};
 
 		assertThat(resultArray, is(expectArray));
 	}
