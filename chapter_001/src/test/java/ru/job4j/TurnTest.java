@@ -8,8 +8,8 @@ import static org.junit.Assert.assertThat;
 * Test.
 *
 * @author Karetskiy
-* @version 1
-* @since 05.01.2017
+* @version 2
+* @since 07.01.2017
 */
 public class TurnTest {
 
@@ -25,6 +25,22 @@ public class TurnTest {
 		Turn turn = new Turn();
 		int[] resultArray = turn.back(array);
 		final int[] expectArray = {3, 5, 2, 4};
+
+		assertThat(resultArray, is(expectArray));
+	}
+
+	/**
+	* Проверяем сортировку массива.
+	* правильный ответ: {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	*/
+	@Test
+	public void sortingArray() {
+
+		int[] array = {4, 2, 5, 3, 1, 10, 6, 7, 8, 9};
+
+		Turn turn = new Turn();
+		int[] resultArray = turn.getSorting(array);
+		final int[] expectArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
 		assertThat(resultArray, is(expectArray));
 	}
