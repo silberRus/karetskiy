@@ -15,6 +15,7 @@ public class Paint {
 	*/
 	public String piramid(int h) {
 
+		String rn = System.getProperty("line.separator");
 		StringBuilder result = new StringBuilder();
 
 		for (int line = 1; line <= h; line++) {
@@ -22,11 +23,14 @@ public class Paint {
 			int probLeft 	= h - line;
 			int probInside 	= line * 2 - 3;
 
-			if (line == 1) {
-				result.append(probels(probLeft) + "^" + "\n");
-			} else {
-				result.append(probels(probLeft) + "^" + probels(probInside) + "^\n");
+			result.append(probels(probLeft));
+			result.append("^");
+
+			if (line > 1) {
+				result.append(probels(probInside));
+				result.append("^");
 			}
+			result.append(rn);
 		}
 		return result.toString();
 	}

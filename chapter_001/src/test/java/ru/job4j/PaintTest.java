@@ -25,9 +25,10 @@ public class PaintTest {
 
 		int h = 3;
 
+		String rn = System.getProperty("line.separator");
 		Paint paint = new Paint();
 		String result = paint.piramid(h);
-		final String area = new String("  ^\n ^ ^\n^   ^\n");
+		final String area = new String("  ^" + rn + " ^ ^" + rn + "^   ^" + rn);
 
 		assertThat(result, is(area));
 	}
