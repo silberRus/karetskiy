@@ -8,10 +8,27 @@ import static org.junit.Assert.assertThat;
 * Test.
 *
 * @author Karetskiy
-* @version 4
-* @since 08.01.2017
+* @version 5
+* @since 11.01.2017
 */
 public class TurnTest {
+
+	/**
+	 * Проверяем объединение двух сортированных массивов в третий сортированный.
+	 * правильный ответ: {1, 2, 3, 4, 5, 6, 7}
+	 */
+	@Test
+	public void addTwoArrayForSorting() {
+
+		final int[] array1 = {1, 4, 5, 8, 9};
+		final int[] array2 = {2, 3, 6, 7, 10, 11, 12};
+
+		Turn turn = new Turn();
+		int[] resultArray = turn.unionAndSort(array1, array2);
+		final int[] expectArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
+
+		assertThat(resultArray, is(expectArray));
+	}
 
 	/**
 	* Проверяем переворот массива.

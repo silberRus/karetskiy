@@ -5,10 +5,39 @@ import java.util.Arrays;
 /**
 * Class массивов.
 * @author karetskiy
-* @since 08.01.2017
-* @version 4
+* @since 11.01.2017
+* @version 5
 */
 public class Turn {
+
+	/**
+	 * Объединяем два сортированых массива в третий общий
+	 * и сразу сортируем его за 1 проход.
+	 * @param array1 - 1 сортиованный массив.
+	 * @param array2 - 2 сортиованный массив.
+	 * @return объединенный сортированный массив:
+	 */
+	public int[] unionAndSort(int[] array1, int[] array2) {
+
+		Cell value = new Cell();
+		Cell size = new Cell();
+		size.compare(array1.length, array2.length);
+
+		int[] newArray = new int[array1.length + array2.length];
+
+		for (int ind = 0; ind < size.max; ind++) {
+
+			if (value.compare(array1, array2, ind)) {
+
+				newArray[ind * 2] 		= value.min;
+				newArray[ind * 2 + 1] 	= value.max;
+
+			} else {
+				newArray[size.min * 2 + ind - size.min] = value.max;
+			}
+		}
+		return newArray;
+	}
 
 	/**
 	* Убираем дубликаты из массива.
