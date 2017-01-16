@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test.
@@ -19,7 +19,7 @@ public class TrackerTest {
      * при добавлении заявки id должен быть заполнен и первый элемент не должен быть null.
      */
     @Test
-    public void add() throws Exception {
+    public void add() {
 
         Tracker tracker = new Tracker();
         final boolean expect = true;
@@ -35,7 +35,7 @@ public class TrackerTest {
      * при обновлении имя должно изменится.
      */
     @Test
-    public void update() throws Exception {
+    public void update() {
 
         int ind = 1;
         final String expect = "имя обновлено";
@@ -54,7 +54,7 @@ public class TrackerTest {
      * удаляем 2 заявку, при удалениии на месте 2ой заявек будет 3я .
      */
     @Test
-    public void delete() throws Exception {
+    public void delete() {
 
         Tracker tracker = newTracker();
 
@@ -71,7 +71,7 @@ public class TrackerTest {
      * Проверяем что количество добавленных элементов равна 4.
      */
     @Test
-    public void findAll() throws Exception {
+    public void findAll() {
 
         Tracker tracker = newTracker();
         final int expect = 4;
@@ -86,7 +86,7 @@ public class TrackerTest {
      * Проверяем что будет найдено 2 заявки.
      */
     @Test
-    public void findByName() throws Exception {
+    public void findByName() {
 
         Tracker tracker = newTracker();
         final int expect = 2;
@@ -100,7 +100,7 @@ public class TrackerTest {
      * Ищем по id.
      */
     @Test
-    public void findById() throws Exception {
+    public void findById() {
 
         Tracker tracker = newTracker();
         final boolean expect = true;
@@ -112,10 +112,10 @@ public class TrackerTest {
     }
 
     /**
-     * Быстро создает трекер с заполненными заявками
+     * Быстро создает трекер с заполненными заявками.
      * @return заполненный трекер для тестов
      */
-    private Tracker newTracker(){
+    private Tracker newTracker() {
 
         Tracker tracker = new Tracker();
         tracker.add(new Item("1 имя", "1 описание"));

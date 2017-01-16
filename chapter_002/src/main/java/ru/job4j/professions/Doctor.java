@@ -6,7 +6,7 @@ package ru.job4j.professions;
  * @since 14.01.2017
  * @version 1
  */
-public class Doctor extends Profession{
+public class Doctor extends Profession {
 
     /**
      * Специлизация.

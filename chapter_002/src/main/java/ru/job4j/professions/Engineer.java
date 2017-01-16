@@ -6,7 +6,7 @@ package ru.job4j.professions;
  * @since 14.01.2017
  * @version 1
  */
-public class Engineer extends Profession{
+public class Engineer extends Profession {
 
     /**
      * Специлизация.

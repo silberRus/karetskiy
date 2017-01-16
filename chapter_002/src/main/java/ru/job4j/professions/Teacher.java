@@ -7,15 +7,15 @@ package ru.job4j.professions;
  * @version 1
  */
 
-public class Teacher extends Profession{
+public class Teacher extends Profession {
 
     /**
-     * Номер класса
+     * Номер класса.
      */
     private int classRoom;
 
     /**
-     * Буква класса
+     * Буква класса.
      */
     private char letter;
 

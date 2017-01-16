@@ -8,8 +8,19 @@ package ru.job4j.professions;
  */
 public class People {
 
+    /**
+     * Профессия человека.
+     */
     private Profession profession;
+
+    /**
+     * Здоровье человека.
+     */
     private int healt = 100;
+
+    /**
+     * Оброзование человека.
+     */
     private int education;
 
     /**

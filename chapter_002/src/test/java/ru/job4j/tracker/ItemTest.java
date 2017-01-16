@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * Test.
@@ -15,11 +15,11 @@ import static org.junit.Assert.*;
 public class ItemTest {
 
     /**
-     * Устанавливаем id заявке
+     * Устанавливаем id заявке.
      * правильный ответ: "id 1"
      */
     @Test
-    public void setID() throws Exception {
+    public void setID()  {
 
         final String expectId = "id 1";
 

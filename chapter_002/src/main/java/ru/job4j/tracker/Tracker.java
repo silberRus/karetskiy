@@ -10,7 +10,14 @@ import java.util.UUID;
  */
 public class Tracker {
 
+    /**
+     * Хранилище заявок.
+     */
     private Item[] items = new Item[10];
+
+    /**
+     * верхний индекс заявки (незанятый).
+     */
     private int newIndex = 0;
 
     /**
@@ -38,10 +45,10 @@ public class Tracker {
      * Удаляем зачку из трекера.
      * @param item - заявка которую удаляем.
      */
-    public void delete(Item item){
+    public void delete(Item item) {
 
-        newIndex --;
-        for (int ind = getIndItem(item); ind != newIndex; ind ++) {
+        newIndex--;
+        for (int ind = getIndItem(item); ind != newIndex; ind++) {
             items[ind] = items[ind + 1];
         }
     }
@@ -50,10 +57,10 @@ public class Tracker {
      * Находим все заявки.
      * @return все зачвки трекера:
      */
-    public Item[] findAll(){
+    public Item[] findAll() {
 
         Item[] findItems = new Item[newIndex];
-        for (int ind = 0; ind != newIndex; ind++){
+        for (int ind = 0; ind != newIndex; ind++) {
             findItems[ind] = items[ind];
         }
         return findItems;
@@ -64,7 +71,7 @@ public class Tracker {
      * @param name - имя по которому ищем заявки.
      * @return заявки с указанным именем:
      */
-    public Item[] findByName(String name){
+    public Item[] findByName(String name) {
 
         int numFind = 0;
 
@@ -88,10 +95,12 @@ public class Tracker {
      * @param id - ID заявки.
      * @return заявки с указанным id:
      */
-    public Item findById(String id){
+    public Item findById(String id) {
 
         for (int ind = 0; ind != newIndex; ind++) {
-            if (this.items[ind].id == id) return this.items[ind];
+            if (this.items[ind].id == id) {
+                return this.items[ind];
+            }
         }
         return null;
     }
@@ -104,7 +113,9 @@ public class Tracker {
     private int getIndItem(Item item) {
 
         for (int ind = 0; ind != newIndex; ind++) {
-            if (items[ind].id == item.id) return ind;
+            if (items[ind].id == item.id) {
+                return ind;
+            }
         }
         return -1;
     }
