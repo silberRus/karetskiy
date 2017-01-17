@@ -25,7 +25,7 @@ public class TrackerTest {
         final boolean expect = true;
         tracker.add(new Item("Имя 1", "Описание 1"));
         Item item = tracker.getByIndex(0);
-        final boolean result = item != null && item.id != "";
+        final boolean result = item != null && !item.getID().isEmpty();
 
         assertThat(result, is(expect));
     }
@@ -42,11 +42,11 @@ public class TrackerTest {
         Tracker tracker = newTracker();
 
         Item item = tracker.getByIndex(ind);
-        item.name = expect;
+        item.setName(expect);
 
         tracker.update(item);
 
-        assertThat(tracker.getByIndex(ind).name, is(expect));
+        assertThat(tracker.getByIndex(ind).getName(), is(expect));
     }
 
     /**
@@ -59,11 +59,11 @@ public class TrackerTest {
         Tracker tracker = newTracker();
 
         int delInd = 1;
-        final String expect = tracker.getByIndex(delInd + 1).name;
+        final String expect = tracker.getByIndex(delInd + 1).getName();
 
         tracker.delete(tracker.getByIndex(delInd));
 
-        assertThat(tracker.getByIndex(delInd).name, is(expect));
+        assertThat(tracker.getByIndex(delInd).getName(), is(expect));
     }
 
     /**
@@ -104,11 +104,11 @@ public class TrackerTest {
 
         Tracker tracker = newTracker();
         final boolean expect = true;
-        String id = tracker.getByIndex(0).id;
+        String id = tracker.getByIndex(0).getID();
 
         Item findItem = tracker.findById(id);
 
-        assertThat(findItem.id == id, is(expect));
+        assertThat(findItem.getID().equals(id), is(expect));
     }
 
     /**

@@ -25,15 +25,15 @@ public class Turn {
 
 		int[] newArray = new int[array1.length + array2.length];
 
-		for (int ind = 0; ind < size.max; ind++) {
+		for (int ind = 0; ind < size.max(); ind++) {
 
 			if (value.compare(array1, array2, ind)) {
 
-				newArray[ind * 2] 		= value.min;
-				newArray[ind * 2 + 1] 	= value.max;
+				newArray[ind * 2] 		= value.min();
+				newArray[ind * 2 + 1] 	= value.max();
 
 			} else {
-				newArray[size.min * 2 + ind - size.min] = value.max;
+				newArray[size.min() * 2 + ind - size.min()] = value.max();
 			}
 		}
 		return newArray;

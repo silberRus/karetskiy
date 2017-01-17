@@ -5,8 +5,8 @@ import java.util.UUID;
 /**
  * Class Трекера.
  * @author karetskiy
- * @since 16.01.2017
- * @version 1
+ * @since 17.01.2017
+ * @version 2
  */
 public class Tracker {
 
@@ -76,14 +76,14 @@ public class Tracker {
         int numFind = 0;
 
         for (int ind = 0; ind != newIndex; ind++) {
-            if (items[ind].name == name) {
+            if (items[ind].getName() == name) {
                 numFind++;
             }
         }
         Item[] newItems = new Item[numFind];
 
         for (int ind = 0; ind != numFind; ind++) {
-            if (items[ind].name == name) {
+            if (items[ind].getName() == name) {
                 newItems[ind] = items[ind];
             }
         }
@@ -98,7 +98,7 @@ public class Tracker {
     public Item findById(String id) {
 
         for (int ind = 0; ind != newIndex; ind++) {
-            if (this.items[ind].id == id) {
+            if (this.items[ind].getID().equals(id)) {
                 return this.items[ind];
             }
         }
@@ -113,7 +113,7 @@ public class Tracker {
     private int getIndItem(Item item) {
 
         for (int ind = 0; ind != newIndex; ind++) {
-            if (items[ind].id == item.id) {
+            if (items[ind].getID().equals(item.getID())) {
                 return ind;
             }
         }

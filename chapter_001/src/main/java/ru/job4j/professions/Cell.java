@@ -11,7 +11,25 @@ public class Cell {
 	/**
 	* Минимальное и максимальное числа.
 	*/
-    public int min, max;
+    private int min, max;
+
+    /**
+     * Возвращает минимальное число.
+     * @return минимум
+     */
+    public int min() {
+
+         return this.min;
+    }
+
+    /**
+     * Возвращает максимальное число.
+     * @return максимум
+     */
+    public int max() {
+
+        return this.max;
+    }
 
     /**
      * Сравнивает два числа в двух массивах по одному индексу,

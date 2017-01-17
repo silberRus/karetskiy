@@ -25,7 +25,7 @@ public class ItemTest {
 
         Item item = new Item("название", "описание");
         item.setID(expectId);
-        String resultId = item.id;
+        String resultId = item.getID();
 
         assertThat(resultId, is(expectId));
     }

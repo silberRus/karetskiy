@@ -3,8 +3,8 @@ package ru.job4j.professions;
 /**
  * Class человека.
  * @author karetskiy
- * @since 14.01.2017
- * @version 1
+ * @since 17.01.2017
+ * @version 2
  */
 public class People {
 
@@ -14,14 +14,58 @@ public class People {
     private Profession profession;
 
     /**
-     * Здоровье человека.
+     * Здоровье и образоване человека.
      */
-    private int healt = 100;
+    private int healt, education;
 
     /**
-     * Оброзование человека.
+     * Простой человек без образования и профессии.
      */
-    private int education;
+    public People() {
+
+        this.healt = 100;
+        this.education = 0;
+    }
+
+    /**
+     * Создаем сразу заполненного человека.
+     * @param healt - Здоровье.
+     * @param education - Образование.
+     * @param profession - Профессия.
+     */
+    public People(int healt, int education, Profession profession) {
+
+        this.healt = healt;
+        this.education = education;
+        this.profession = profession;
+    }
+
+    /**
+     * Возвращает здоровье.
+     * @return здоровье.
+     */
+    public int getHealt() {
+
+        return this.healt;
+    }
+
+    /**
+     * Возвращает образование.
+     * @return здоровье.
+     */
+    public int getEducation() {
+
+        return this.education;
+    }
+
+    /**
+     * Возвращает профессию.
+     * @return профессия.
+     */
+    public Profession getProfession() {
+
+        return this.profession;
+    }
 
     /**
      * Добавляет образование.

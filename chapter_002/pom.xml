@@ -1,8 +1,8 @@
 <project>
     
 	<modelVersion>4.0.0</modelVersion>
-    <groupId>ru.job4j</groupId>
-    <version>2.0</version>
+    <groupId>tracker</groupId>
+    <version>1.0</version>
     <artifactId>chapter_002</artifactId>
 	<packaging>jar</packaging>
 	
@@ -11,5 +11,30 @@
 		<artifactId>junior</artifactId>
 		<version>2.0</version>
 	</parent>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.4.3</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>ru.job4j.tracker.Tracker</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 	
 </project>
