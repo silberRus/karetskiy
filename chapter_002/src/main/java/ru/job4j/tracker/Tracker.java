@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.UUID;
+import java.util.Random;
 
 /**
  * Class Трекера.
@@ -16,9 +16,14 @@ public class Tracker {
     private Item[] items = new Item[10];
 
     /**
-     * верхний индекс заявки (незанятый).
+     * Верхний индекс заявки (незанятый).
      */
     private int newIndex = 0;
+
+    /**
+     * Генератор случайных чисел.
+     */
+    private static final Random RN = new Random();
 
     /**
      * Добавляем заявку в трекер.
@@ -27,7 +32,7 @@ public class Tracker {
      */
     public Item add(Item item) {
 
-        item.setID(String.valueOf(UUID.randomUUID()));
+        item.setID(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
         this.items[newIndex++] = item;
         return item;
     }
@@ -38,7 +43,7 @@ public class Tracker {
      */
     public void update(Item item) {
 
-        items[getIndItem(item)] = item;
+        this.items[getIndItem(item)] = item;
     }
 
     /**
@@ -48,8 +53,8 @@ public class Tracker {
     public void delete(Item item) {
 
         newIndex--;
-        for (int ind = getIndItem(item); ind != newIndex; ind++) {
-            items[ind] = items[ind + 1];
+        for (int ind = getIndItem(item); ind != this.newIndex; ind++) {
+            this.items[ind] = this.items[ind + 1];
         }
     }
 
@@ -59,9 +64,9 @@ public class Tracker {
      */
     public Item[] findAll() {
 
-        Item[] findItems = new Item[newIndex];
-        for (int ind = 0; ind != newIndex; ind++) {
-            findItems[ind] = items[ind];
+        Item[] findItems = new Item[this.newIndex];
+        for (int ind = 0; ind != this.newIndex; ind++) {
+            findItems[ind] = this.items[ind];
         }
         return findItems;
     }
@@ -75,16 +80,16 @@ public class Tracker {
 
         int numFind = 0;
 
-        for (int ind = 0; ind != newIndex; ind++) {
-            if (items[ind].getName() == name) {
+        for (int ind = 0; ind != this.newIndex; ind++) {
+            if (items[ind].getName().equals(name)) {
                 numFind++;
             }
         }
         Item[] newItems = new Item[numFind];
 
         for (int ind = 0; ind != numFind; ind++) {
-            if (items[ind].getName() == name) {
-                newItems[ind] = items[ind];
+            if (items[ind].getName().equals(name)) {
+                newItems[ind] = this.items[ind];
             }
         }
         return newItems;

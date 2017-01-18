@@ -26,6 +26,18 @@ public class Item {
     }
 
     /**
+     * Возвращает строковое представление заявки.
+     * @return представление заявки.
+     */
+    public String toString() {
+
+        String rn = System.getProperty("line.separator");
+        StringBuilder string = new StringBuilder();
+
+        return string.append("(").append(this.id).append(") ").append(this.name).append(" : ").append(this.description).toString();
+    }
+
+    /**
      * Устанавливает id.
      * @param id - уникальный идентификатор заявки.
      */
