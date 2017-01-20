@@ -33,7 +33,7 @@ public class Tracker {
     public Item add(Item item) {
 
         item.setID(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
-        this.items[newIndex++] = item;
+        this.items[this.newIndex++] = item;
         return item;
     }
 
@@ -81,14 +81,14 @@ public class Tracker {
         int numFind = 0;
 
         for (int ind = 0; ind != this.newIndex; ind++) {
-            if (items[ind].getName().equals(name)) {
+            if (this.items[ind].getName().equals(name)) {
                 numFind++;
             }
         }
         Item[] newItems = new Item[numFind];
 
         for (int ind = 0; ind != numFind; ind++) {
-            if (items[ind].getName().equals(name)) {
+            if (this.items[ind].getName().equals(name)) {
                 newItems[ind] = this.items[ind];
             }
         }
@@ -115,7 +115,7 @@ public class Tracker {
      * @param item - заявка индекс которой ищем.
      * @return индекс в массиве:
      */
-    private int getIndItem(Item item) {
+    public int getIndItem(Item item) {
 
         for (int ind = 0; ind != newIndex; ind++) {
             if (items[ind].getID().equals(item.getID())) {

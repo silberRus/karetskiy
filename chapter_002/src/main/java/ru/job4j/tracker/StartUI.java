@@ -11,7 +11,7 @@ public class StartUI {
     /**
      * Интерфейс с которым работаем.
      */
-    private Input input = new ConsoleInput();
+    private Input input;
 
     /**
      * Меню пользователя.
@@ -22,6 +22,17 @@ public class StartUI {
      * Трекер с которым работаем.
      */
     private Tracker tracker = new Tracker();
+
+    public StartUI(Input input, Tracker tracker) {
+
+        this.input = input;
+        this.tracker = tracker;
+    }
+
+    public StartUI(Input input) {
+
+        this.input = input;
+    }
 
     /**
      * Кадр игрового цикла, все аремя спрашиваем пользователя - что делать.
@@ -39,12 +50,20 @@ public class StartUI {
     }
 
     /**
+     * Возвращает трекер.
+     * @return трэкер:
+     */
+    public Tracker getTracker() {
+        return this.tracker;
+    }
+
+    /**
      * Вход в программу.
      * @param args параметры консоля
      */
     public static void main(String[] args) {
 
-        StartUI startUI = new StartUI();
+        StartUI startUI = new StartUI(new ConsoleInput());
         startUI.allTimeAsk();
         System.out.print("Спасибо за использование.");
     }

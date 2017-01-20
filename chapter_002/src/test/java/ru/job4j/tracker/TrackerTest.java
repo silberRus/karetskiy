@@ -115,7 +115,7 @@ public class TrackerTest {
      * Быстро создает трекер с заполненными заявками.
      * @return заполненный трекер для тестов
      */
-    private Tracker newTracker() {
+    Tracker newTracker() {
 
         Tracker tracker = new Tracker();
         tracker.add(new Item("1 имя", "1 описание"));
