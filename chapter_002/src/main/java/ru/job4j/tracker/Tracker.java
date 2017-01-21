@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Class Трекера.
  * @author karetskiy
- * @since 17.01.2017
+ * @since 21.01.2017
  * @version 2
  */
 public class Tracker {
@@ -86,10 +86,11 @@ public class Tracker {
             }
         }
         Item[] newItems = new Item[numFind];
+        int tekIndFind = 0;
 
-        for (int ind = 0; ind != numFind; ind++) {
+        for (int ind = 0; ind != this.newIndex; ind++) {
             if (this.items[ind].getName().equals(name)) {
-                newItems[ind] = this.items[ind];
+                newItems[tekIndFind++] = this.items[ind];
             }
         }
         return newItems;

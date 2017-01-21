@@ -64,14 +64,14 @@ public class StartUITest {
     }
 
     /**
-     * Проверяем поиск заявки по имени.
+     * Проверяем поиск заявки по имени, найдем 2 заявки.
      * Нажать: 5, имя одинаковое, 0
      */
     @Test
     public void findForNameTwoItems() {
 
         final String[] answers = {"5", "имя одинаковое", "0"};
-        new StartUI(new StubInput(answers)).allTimeAsk();
+        new StartUI(new StubInput(answers),  newTracker()).allTimeAsk();
     }
 
     /**
