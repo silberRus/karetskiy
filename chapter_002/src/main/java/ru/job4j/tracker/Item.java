@@ -4,8 +4,8 @@ package ru.job4j.tracker;
 /**
  * Class Базовый класс заявки.
  * @author karetskiy
- * @since 17.01.2017
- * @version 2
+ * @since 25.01.2017
+ * @version 3
  */
 public class Item {
 
@@ -31,10 +31,7 @@ public class Item {
      */
     public String toString() {
 
-        String rn = System.getProperty("line.separator");
-        StringBuilder string = new StringBuilder();
-
-        return string.append("(").append(this.id).append(") ").append(this.name).append(" : ").append(this.description).toString();
+        return String.format("[%s] имя: %s; описание: %s", this.id, this.name, this.description);
     }
 
     /**

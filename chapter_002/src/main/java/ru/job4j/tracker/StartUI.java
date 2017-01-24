@@ -3,8 +3,8 @@ package ru.job4j.tracker;
 /**
  * Class пользовательской работы трекера через консоль.
  * @author karetskiy
- * @since 18.01.2017
- * @version 1
+ * @since 25.01.2017
+ * @version 2
  */
 public class StartUI {
 
@@ -23,12 +23,21 @@ public class StartUI {
      */
     private Tracker tracker = new Tracker();
 
+    /**
+     * Иницилизация с интерфейсом и тректроа.
+     * @param input интерфейс.
+     * @param tracker трекер.
+     */
     public StartUI(Input input, Tracker tracker) {
 
         this.input = input;
         this.tracker = tracker;
     }
 
+    /**
+     * Иницилизация с интерфейсом.
+     * @param input интерфейс.
+     */
     public StartUI(Input input) {
 
         this.input = input;
@@ -42,11 +51,11 @@ public class StartUI {
         String out = "";
         System.out.println(this.menu.getShowFullMenu());
         do {
-            System.out.println("------------------------------");
+            System.out.println("-----------------------------");
             out = this.menu.action(this.input.ask("Выберите действие:"), this.tracker, this.input);
             System.out.println(out);
 
-        } while (!out.equals(""));
+        } while (!"".equals(out));
     }
 
     /**
