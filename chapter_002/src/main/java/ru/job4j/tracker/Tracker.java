@@ -1,19 +1,20 @@
 package ru.job4j.tracker;
 
 import java.util.Random;
+import java.util.StringJoiner;
 
 /**
  * Class Трекера.
  * @author karetskiy
- * @since 21.01.2017
- * @version 2
+ * @since 28.01.2017
+ * @version 3
  */
 public class Tracker {
 
     /**
      * Хранилище заявок.
      */
-    private Item[] items = new Item[10];
+    private Item[] items = new Item[5];
 
     /**
      * Верхний индекс заявки (незанятый).
@@ -33,7 +34,13 @@ public class Tracker {
     public Item add(Item item) {
 
         item.setID(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
-        this.items[this.newIndex++] = item;
+        try
+        {
+            this.items[this.newIndex++] = item;
+        } catch (ArrayIndexOutOfBoundsException ar)  {
+            this.newIndex--;
+            System.out.println(String.format("Заявка не добавлена, максимум заявок может быть %s", String.valueOf(items.length)));
+        }
         return item;
     }
 

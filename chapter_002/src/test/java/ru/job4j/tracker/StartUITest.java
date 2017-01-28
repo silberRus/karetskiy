@@ -6,8 +6,8 @@ import org.junit.Test;
  * Test user interface.
  *
  * @author Karetskiy
- * @version 1
- * @since 21.01.2017
+ * @version 2
+ * @since 28.01.2017
  */
 public class StartUITest {
 
@@ -17,10 +17,10 @@ public class StartUITest {
      * рзультатом будет успешный выход из программы, а не зависание в бесконечном цикле.
      */
     @Test
-    public void input0ThenExit() {
+    public void input0ThenExit() throws MenuOutExeption {
 
         final String[] answers = {"0"};
-        new StartUI(new StubInput(answers)).allTimeAsk();;
+        new StartUI(new StubInput(answers), newTracker()).allTimeAsk();;
     }
 
     /**
@@ -28,10 +28,10 @@ public class StartUITest {
      * Нажать: 1, имя, описание
      */
     @Test
-    public void inputNewItem() {
+    public void inputNewItem() throws MenuOutExeption {
 
         final String[] answers = {"1", "имя", "описание", "0"};
-        new StartUI(new StubInput(answers)).allTimeAsk();
+        new StartUI(new StubInput(answers), newTracker()).allTimeAsk();
     }
 
     /**
@@ -39,7 +39,7 @@ public class StartUITest {
      * Нажать: 2, id, новое имя, новое описание, 4, 0
      */
     @Test
-    public void editItemNumber2() {
+    public void editItemNumber2() throws MenuOutExeption {
 
         Tracker tracker = newTracker();
         String id = tracker.getByIndex(1).getID();
@@ -53,7 +53,7 @@ public class StartUITest {
      * Нажать: 3, id первого, 3, id второго, 4, 0
      */
     @Test
-    public void deleteItemNumber1andNumber3() {
+    public void deleteItemNumber1andNumber3() throws MenuOutExeption {
 
         Tracker tracker = newTracker();
         String idFirst = tracker.getByIndex(0).getID();
@@ -68,7 +68,7 @@ public class StartUITest {
      * Нажать: 5, имя одинаковое, 0
      */
     @Test
-    public void findForNameTwoItems() {
+    public void findForNameTwoItems() throws MenuOutExeption {
 
         final String[] answers = {"5", "имя одинаковое", "0"};
         new StartUI(new StubInput(answers),  newTracker()).allTimeAsk();
@@ -79,7 +79,7 @@ public class StartUITest {
      * Нажать: 6, id, 0
      */
     @Test
-    public void findForIDNumberTwo() {
+    public void findForIDNumberTwo() throws MenuOutExeption {
 
         Tracker tracker = newTracker();
         String id = tracker.getByIndex(1).getID();

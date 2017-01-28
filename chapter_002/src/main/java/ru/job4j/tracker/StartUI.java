@@ -3,8 +3,8 @@ package ru.job4j.tracker;
 /**
  * Class пользовательской работы трекера через консоль.
  * @author karetskiy
- * @since 25.01.2017
- * @version 2
+ * @since 28.01.2017
+ * @version 4
  */
 public class StartUI {
 
@@ -21,7 +21,7 @@ public class StartUI {
     /**
      * Трекер с которым работаем.
      */
-    private Tracker tracker = new Tracker();
+    private Tracker tracker;
 
     /**
      * Иницилизация с интерфейсом и тректроа.
@@ -35,27 +35,18 @@ public class StartUI {
     }
 
     /**
-     * Иницилизация с интерфейсом.
-     * @param input интерфейс.
+     * Кадр игрового цикла, все время спрашиваем пользователя - что делать.
      */
-    public StartUI(Input input) {
+    public void allTimeAsk() throws MenuOutExeption {
 
-        this.input = input;
-    }
-
-    /**
-     * Кадр игрового цикла, все аремя спрашиваем пользователя - что делать.
-     */
-    public void allTimeAsk() {
-
-        String out = "";
+        String ask = "";
         System.out.println(this.menu.getShowFullMenu());
         do {
             System.out.println("-----------------------------");
-            out = this.menu.action(this.input.ask("Выберите действие:"), this.tracker, this.input);
-            System.out.println(out);
+            ask = this.input.ask("Выберите действие:", this.menu.listAsks());
+            System.out.println(this.menu.action(ask, this.tracker, this.input));
 
-        } while (!"".equals(out));
+        } while (!ask.equals(this.menu.askExit()));
     }
 
     /**
@@ -70,10 +61,9 @@ public class StartUI {
      * Вход в программу.
      * @param args параметры консоля
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MenuOutExeption {
 
-        StartUI startUI = new StartUI(new ConsoleInput());
+        StartUI startUI = new StartUI(new ValidateInput(), new Tracker());
         startUI.allTimeAsk();
-        System.out.print("Спасибо за использование.");
     }
 }

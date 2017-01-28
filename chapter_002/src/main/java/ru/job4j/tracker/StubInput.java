@@ -3,8 +3,8 @@ package ru.job4j.tracker;
 /**
  * Class ввод информации без консоли.
  * @author karetskiy
- * @since 21.01.2017
- * @version 1
+ * @since 28.01.2017
+ * @version 4
  */
 
 public class StubInput implements Input {
@@ -35,5 +35,10 @@ public class StubInput implements Input {
     public String ask(String question) {
 
         return answser[index++];
+    }
+
+    public String ask(String question, String[] listAsks) {
+
+        return ask(question);
     }
 }

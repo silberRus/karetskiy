@@ -3,10 +3,16 @@ package ru.job4j.tracker;
 /**
  * Class хранилище меню.
  * @author karetskiy
- * @since 25.01.2017
- * @version 1
+ * @since 28.01.2017
+ * @version 3
  */
 public class Menu {
+
+    /**
+     * Что нужно нажать чтобы выйти.
+     * @return символ выхода.
+     */
+    private String askExit = new Exit().key();
 
     /**
      * Вараинты меню.
@@ -17,7 +23,8 @@ public class Menu {
             new DeleteItem(),
             new ShowAllItem(),
             new FindByNameItems(),
-            new FindByIDItems()};
+            new FindByIDItems(),
+            new Exit()};
 
     /**
      * Выполняет определенные действия в зависимости от выбора пользователя.
@@ -34,6 +41,27 @@ public class Menu {
             }
         }
         return "";
+    }
+
+    /**
+     * Возвращает массив возможных вопросов пользователя.
+     * @return массив вопросов.
+     */
+    public String[] listAsks() {
+
+        String[] asks = new String[this.actions.length];
+        for (int index = 0; index < this.actions.length; index ++) {
+            asks[index] = this.actions[index].key();
+        }
+        return asks;
+    }
+
+    /**
+     * Возвращает действие выход.
+     * @return действие выход.
+     */
+    public String askExit() {
+        return this.askExit;
     }
 
     /**
@@ -75,7 +103,6 @@ public class Menu {
         for (UserActions action : this.actions) {
             strMenu.append(action.info()).append(rn);
         }
-        strMenu.append("любой другой символ - выход").append(rn);
         return strMenu.toString();
     }
 
@@ -296,6 +323,39 @@ public class Menu {
          */
         public String info() {
             return formatMenuLine(this, "Найти заявку по ID");
+        }
+    }
+
+    /**
+     * Class действий, выход из меню.
+     */
+    class Exit implements UserActions {
+
+        /**
+         * Ключ действия.
+         * @return ключ действия.
+         */
+        public String key() {
+            return "0";
+        }
+
+        /**
+         * Ищет по ID заявку.
+         * @param input - интрфейс.
+         * @param tracker - трекер.
+         * @return результат поиска заявки по ID.
+         */
+        public String execute(Input input, Tracker tracker) {
+
+            return "Спасибо за использование!";
+        }
+
+        /**
+         * Информация о действии.
+         * @return информацию.
+         */
+        public String info() {
+            return formatMenuLine(this, "Выход из трекера.");
         }
     }
 }
