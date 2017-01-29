@@ -3,8 +3,8 @@ package ru.job4j.tracker;
 /**
  * Class хранилище меню.
  * @author karetskiy
- * @since 28.01.2017
- * @version 3
+ * @since 30.01.2017
+ * @version 4
  */
 public class Menu {
 
@@ -17,7 +17,7 @@ public class Menu {
     /**
      * Вараинты меню.
      */
-    private UserActions[] actions = {
+    private BaseAction[] actions = {
             new AddItem(),
             new EditItem(),
             new DeleteItem(),
@@ -35,7 +35,7 @@ public class Menu {
      */
     public String action(String ask, Tracker tracker, Input input) {
 
-        for (UserActions action : this.actions) {
+        for (BaseAction action : this.actions) {
             if(ask.equals(action.key())) {
                 return action.execute(input, tracker);
             }
@@ -100,20 +100,16 @@ public class Menu {
         StringBuilder strMenu = new StringBuilder();
 
         strMenu.append("Трекер заявок").append(rn);
-        for (UserActions action : this.actions) {
+        for (BaseAction action : this.actions) {
             strMenu.append(action.info()).append(rn);
         }
         return strMenu.toString();
     }
 
-    private String formatMenuLine(UserActions action, String text) {
-        return String.format("%s - %s", action.key(), text);
-    }
-
     /**
      * Class действий, внутренний - добавление заявки.
      */
-    class AddItem implements UserActions {
+    class AddItem extends BaseAction {
 
         /**
          * Ключ действия.
@@ -139,14 +135,14 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Создать заявку");
+            return super.fomatInfo("Создать заявку");
         }
     }
 
     /**
      * Class действий, внутренний - редактирование заявки.
      */
-    class EditItem implements UserActions {
+    class EditItem extends BaseAction {
 
         /**
          * Ключ действия.
@@ -181,14 +177,14 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Редактировать заявку");
+            return super.fomatInfo("Редактировать заявку");
         }
     }
 
     /**
      * Class действий, внутренний - удаление заявки.
      */
-    class DeleteItem implements UserActions {
+    class DeleteItem extends BaseAction {
 
         /**
          * Ключ действия.
@@ -220,14 +216,14 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Удалить заявку");
+            return super.fomatInfo("Удалить заявку");
         }
     }
 
     /**
      * Class действий, внутренний - показывает все заявки.
      */
-    class ShowAllItem implements UserActions {
+    class ShowAllItem extends BaseAction {
 
         /**
          * Ключ действия.
@@ -254,14 +250,15 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Все заявки");
+
+            return super.fomatInfo("Все заявки");
         }
     }
 
     /**
      * Class действий, внутренний - поиск заявок по имени.
      */
-    class FindByNameItems implements UserActions {
+    class FindByNameItems extends BaseAction {
 
         /**
          * Ключ действия.
@@ -288,14 +285,14 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Найти заявки по имени");
+            return super.fomatInfo("Найти заявки по имени");
         }
     }
 
     /**
      * Class действий, внутренний - поиск заявки по ID.
      */
-    class FindByIDItems implements UserActions {
+    class FindByIDItems extends BaseAction {
 
         /**
          * Ключ действия.
@@ -322,14 +319,14 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Найти заявку по ID");
+            return super.fomatInfo("Найти заявку по ID");
         }
     }
 
     /**
      * Class действий, выход из меню.
      */
-    class Exit implements UserActions {
+    class Exit extends BaseAction {
 
         /**
          * Ключ действия.
@@ -355,7 +352,7 @@ public class Menu {
          * @return информацию.
          */
         public String info() {
-            return formatMenuLine(this, "Выход из трекера.");
+            return super.fomatInfo("Выход из трекера.");
         }
     }
 }
