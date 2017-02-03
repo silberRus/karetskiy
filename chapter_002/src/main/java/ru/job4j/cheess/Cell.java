@@ -5,20 +5,32 @@ import java.util.PrimitiveIterator;
 /**
  * Class шахматная клетка.
  * @author karetskiy
- * @since 01.02.2017
- * @version 1
+ * @since 04.02.2017
+ * @version 2
  */
 public class Cell {
 
-    private Vector2 pos;
+    private int x, y;
 
-    public Cell(Vector2 pos) {
-        this.pos = pos;
+    public Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
-    public Vector2 pos() {
+    /**
+     * Возвращает x по горизонтали.
+     * @return позицию по горизонтали.
+     */
+    public int x() {
+        return this.x;
+    }
 
-        return this.pos;
+    /**
+     * Возвращает y по вертикали.
+     * @return позицию по вертикали.
+     */
+    public int y() {
+        return this.y;
     }
 
     /**
@@ -27,96 +39,90 @@ public class Cell {
      * @return истина если это одна и таже позиция.
      */
     public boolean equals(Cell cell) {
-        return cell.pos().x == this.pos().x && this.pos.y == this.pos().y;
+        return cell.x() == this.x && cell.y() == this.y;
     }
 
     /**
      * Возвращает фигуру ячейки;
      * @return фигуру.
      */
-    public Figure getFigure(Figure[] figures) {
+    public int getIndFigure(Figure[] figures) {
 
-        for (Figure figure: figures) {
-            if (figure.position.equals(this)) {
-                return figure;
+        int ind = -1;
+
+        for (ind = 0; ind < figures.length; ind++) {
+            if (figures[ind].position.equals(this)) {
+                break;
             }
         }
-        return null;
+        return ind;
     }
 
     /**
-     * Возвращает модуль числа.
-     * @param num число.
-     * @return модуль.
+     * Проверяет чистая ячейка или на ней ктото стоит.
+     * @param figures фигуры которые проверяются.
+     * @return true если чистая.
      */
-    private int modul(int num) {
-        return num > 0 ? num : -num;
+    public boolean itsClear(Figure[] figures) {
+        int ind = getIndFigure(figures);
+        return ind < 0 || ind >= figures.length;
+    }
+
+    /**
+     * Возвращает вектор размер между двумя точками в виде позиции.
+     * @param pos позицию до которой нужно вычислить длину.
+     * @return позции в которой x будет длина по x, y длина по y.
+     */
+    public Cell length(Cell pos) {
+        //return new Cell(lenght(pos.x(), this.x), lenght(pos.y(), this.y));
+        return new Cell(pos.x() - this.x, pos.y() - this.y);
     }
 
     /**
      * Возвращает массив ячеек по указаному пути от текущей ячейки.
-     * @param way путь до конечной станции.
+     * @param way путь расстояние до конечной станции в виде клетки (вектора).
      * @param cells ячейки достки.
      * @return фигуру.
      */
-    public Cell[] way(Vector2 way, Cell[][] cells) {
+    public Cell[] way(Cell way, Cell[][] cells) {
 
-        int sizeX = modul(way.x);
-        int sizeY = modul(way.y);
-        int size = sizeX > sizeY ? sizeX : sizeY;
+        int sizeX = way.x();
+        int sizeY = way.y();
 
-        Cell[] patch = new Cell[size];
+        int size = Board.modul(sizeX) > Board.modul(sizeY) ? Board.modul(sizeX) : Board.modul(sizeY);
 
-        for (int ind = 0; ind < size; ind ++, way.GoToZero()) {
-            patch[ind] = cells[this.pos.x + sizeX - way.x][this.pos.y + sizeY - way.y];
+        Cell[] patch = new Cell[size + 1];
+
+        for (int ind = 0; ind <= size; ind ++) {
+            patch[ind] = cells[this.x + sizeX - way.x() - 1][this.y + sizeY - way.y() - 1];
+            way.GoToZero();
         }
         return patch;
     }
 
     /**
-     * Внутренний класс вектора 2D.
+     * Вычисляет длину расстояния между 1D точками, сколько нужно пройти клеток чтобы достигнуть цель.
+     * @param num1 позиция начала.
+     * @param num2 позиция финиша.
+     * @return количество клеток сколько нужно пройти.
      */
-    static class Vector2 {
+    private int lenght(int num1, int num2) {
 
-        /**
-         * Координаты точки.
-         */
-        public int x, y;
-
-        /**
-         * Создает точку.
-         */
-        public Vector2(int x, int y) {
-
-            this.x = x;
-            this.y = y;
+        if (num2 > num1) {
+            return num1 - num2 - 1;
+        } else if (num1 > num2) {
+            return num1 - num2 + 1;
+        } else {
+            return 0;
         }
+    }
 
-        /**
-         * Создает копию вектора на основании переданного в направлении дистанции.
-         */
-        public Vector2(Vector2 vector, Vector2 napravlenie) {
+    /**
+    * Уменьшает вектор стремясь к нулю
+    */
+    private void GoToZero() {
 
-            this.x = vector.x;
-            this.y = vector.y;
-        }
-
-        /**
-         * Возвращает вектор размер между двумя точками в виде позиции.
-         * @param pos позицию до которой нужно вычислить длину.
-         * @return позции в которой x будет длина по x, y длина по y.
-         */
-        public Vector2 length(Vector2 pos) {
-            return new Vector2(pos.x - this.x, pos.y - this.y);
-        }
-
-        /**
-         * Уменьшает вектор стремясь к нулю
-         */
-        private void GoToZero() {
-
-            this.x = this.x - this.x == 0 ? 0 : this.x > 0 ? 1 : -1;
-            this.y = this.y - this.y == 0 ? 0 : this.y > 0 ? 1 : -1;
-        }
+        this.x = this.x - (this.x == 0 ? 0 : this.x > 0 ? 1 : -1);
+        this.y = this.y - (this.y == 0 ? 0 : this.y > 0 ? 1 : -1);
     }
 }

@@ -3,19 +3,18 @@ package ru.job4j.cheess;
 /**
  * Class фигуры Слона.
  * @author karetskiy
- * @since 01.02.2017
- * @version 1
+ * @since 04.02.2017
+ * @version 2
  */
 public class Bishop extends Figure{
 
-
     /**
      * При создании сразу ставим фигуру на место.
-     *
-     * @param position
+     * @param position позиция
+     * @param team команда
      */
-    protected Bishop(Cell position) {
-        super(position);
+    protected Bishop(Cell position, char team) {
+        super(position, team);
     }
 
     /**
@@ -34,6 +33,6 @@ public class Bishop extends Figure{
      * @return нового слона.
      */
     public Figure clone(Cell position) {
-        return new Bishop(position);
+        return new Bishop(position, team);
     }
 }

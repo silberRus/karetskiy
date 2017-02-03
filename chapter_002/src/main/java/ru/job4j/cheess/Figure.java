@@ -3,8 +3,8 @@ package ru.job4j.cheess;
 /**
  * Class описание фигуры.
  * @author karetskiy
- * @since 01.02.2017
- * @version 1
+ * @since 04.02.2017
+ * @version 2
  */
 public abstract class Figure {
 
@@ -14,10 +14,17 @@ public abstract class Figure {
     final Cell position;
 
     /**
-     * При создании сразу ставим фигуру на место.
+     * Команда, белая W или черная B.
      */
-    protected Figure(Cell position) {
+    final char team;
+
+    /**
+     * При создании сразу ставим фигуру на место и назначаем команду.
+     */
+    protected Figure(Cell position, char team) {
+
         this.position = position;
+        this.team = team;
     }
 
     /**
