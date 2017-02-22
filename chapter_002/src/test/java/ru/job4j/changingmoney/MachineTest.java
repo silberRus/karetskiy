@@ -8,31 +8,50 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
- * Created by silbe on 14.02.2017.
+ * Class тестировани автомата размена монет.
+ * @author karetskiy
+ * @since 22.02.2017
+ * @version 2
  */
 public class MachineTest {
 
+    /**
+     * Один общий автомат для тестов.
+     */
     final private Machine machine;
 
+    /**
+     * При создании сразу иницилизируем готовый автомат для проверок.
+     */
     public MachineTest () {
 
         TypeMoney moneta = new TypeMoney("монета");
         TypeMoney note = new TypeMoney("блокнота");
 
-        this.machine = new Machine(new Money[]{
+        this.machine = new Machine(new Variant(new Money[]{
                 new Money(moneta, 10),
                 new Money(moneta, 5),
                 new Money(moneta, 3),
                 new Money(moneta, 1),
-                new Money(note, 100),
-                new Money(note, 500),
-                new Money(note, 1000)});
+                new Money(note, 100)}));
     }
 
-    public Machine getMachine() {
-        return this.machine;
+    /**
+     * Проверяем размен 10 рублей, должно быть 5 и 5.
+     */
+    @Test
+    public void TenBittOneVariant() throws Exception {
+
+        final Money money = new Money(new TypeMoney("блокнота"), 10);
+        final int[] expect  = new int[]{5, 5};
+        final int[] result  = toArray(this.machine.razmen(money));
+
+        assertThat(result, is(expect));
     }
 
+    /**
+     * Проверяем все возможные варианты размена 10 рублей.
+     */
     @Test
     public void TenBitt() throws Exception {
 
@@ -40,6 +59,7 @@ public class MachineTest {
         final int[][] expect  = new int[][]{{10},
                                             {5,5},
                                             {5,3,1,1},
+                                            {5,1,1,1,1,1},
                                             {3,3,3,1},
                                             {3,3,1,1,1,1},
                                             {3,1,1,1,1,1,1,1},
@@ -49,20 +69,27 @@ public class MachineTest {
         assertThat(result, is(expect));
     }
 
-    static private int[] toArray(Money[] moneys) {
+    /**
+     * Преобразует вариант в массив чисел для дальнейших проверок.
+     */
+    static private int[] toArray(Variant variant) {
 
-        int[] array = new int[moneys.length];
-        for (int ind = 0; ind < moneys.length; ind++) {
-            array[ind] = moneys[ind].getCost();
+        int[] array = new int[variant.getLength()];
+        int ind = 0;
+        for (Money coin: variant.getManeys()) {
+            array[ind++] = coin.getCost();
         }
         return array;
     }
 
-    static private int[][] toArray(Money[][] moneys) {
+    /**
+     * Преобразует массив вариантов в двухмерный массив чисел для дальнейших проверок.
+     */
+    static private int[][] toArray(Variant[] variants) {
 
-        int[][] array = new int[moneys.length][];
-        for (int ind = 0; ind < moneys.length; ind++) {
-            array[ind] = toArray(moneys[ind]);
+        int[][] array = new int[variants.length][];
+        for (int ind = 0; ind < variants.length; ind++) {
+            array[ind] = toArray(variants[ind]);
         }
         return array;
     }

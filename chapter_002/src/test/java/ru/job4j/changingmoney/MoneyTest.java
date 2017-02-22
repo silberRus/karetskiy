@@ -6,10 +6,16 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 /**
- * Created by silbe on 14.02.2017.
+ * Class тестировани автомата размена монет.
+ * @author karetskiy
+ * @since 14.02.2017
+ * @version 1
  */
 public class MoneyTest {
 
+    /**
+     * Поверим получения номинала монеты.
+     */
     @Test
     public void getCost() throws Exception {
 
@@ -18,5 +24,4 @@ public class MoneyTest {
 
         assertThat(result.getCost(), is(expect));
     }
-
 }
