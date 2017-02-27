@@ -26,25 +26,29 @@ public class MyIOService {
      */
     boolean isNumber(InputStream in) throws IOException {
 
-        String strNum = "";
-        int codeSymb = 0;
-        BufferedReader bs = new BufferedReader(new InputStreamReader(in));
+        boolean isEven  = false;
+        String strNum   = "";
+        int codeSymb    = 0;
 
-        while (codeSymb != -1) {
+        try (BufferedReader bs = new BufferedReader(new InputStreamReader(in))) {
 
-            codeSymb = (int) bs.read();
+            while (codeSymb != -1) {
+                codeSymb = (int) bs.read();
 
-            if (codeSymb >= codeBegin && codeSymb <= codeEnd) {
-                strNum += (char) codeSymb;
-            } else if (!"".equals(strNum)) {
-                if (numIsEven(strNum)) {
-                    return true;
-                } else {
-                    strNum = "";
+                if (codeSymb >= codeBegin && codeSymb <= codeEnd) {
+                    strNum += (char) codeSymb;
+                } else if (!"".equals(strNum)) {
+                    if (numIsEven(strNum)) {
+                        isEven = true;
+                        break;
+                    } else {
+                        strNum = "";
+                    }
                 }
             }
+            isEven = numIsEven(strNum);
         }
-        return numIsEven(strNum);
+        return isEven;
     }
 
     /**
