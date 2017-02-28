@@ -5,8 +5,8 @@ import java.io.*;
 /**
  * Class обработки потоков.
  * @author karetskiy
- * @since 28.02.2017
- * @version 1
+ * @since 29.02.2017
+ * @version 2
  */
 public class MyIOService {
 
@@ -20,49 +20,78 @@ public class MyIOService {
     private static int codeEnd = 57;
 
     /**
+     * Убирает из входного потока запрещенные слова и помещает в выходной поток.
+     * @param in входящий символьный поток:
+     * @param out выходящий символьный поток:
+     * @param abuse запрещенные слова которые нужно вырезать.
+     */
+    public void dropAbuses(InputStream in, OutputStream out, String[] abuse) throws IOException {
+
+        final byte[] seporator = System.lineSeparator().getBytes();
+        boolean seporatorOn = false;
+        String tekStr = "";
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in))) {
+
+            while (tekStr != null) {
+
+                tekStr = bufferedReader.readLine();
+
+                if (tekStr != null) {
+
+                    if (seporatorOn) {
+                        out.write(seporator);
+                    } else {
+                        seporatorOn = true;
+                    }
+
+                    if (tekStr != null) {
+
+                        for (String str : abuse) {
+                            tekStr = tekStr.replaceAll(str, "");
+                        }
+                        out.write(tekStr.getBytes());
+                    }
+                }
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Проверяет что в потоке есть четное число.
      * @param in байтовый поток:
      * @return Истина если есть четное число
      */
-    boolean isNumber(InputStream in) throws IOException {
+    public boolean isNumber(InputStream in) throws IOException {
 
-        boolean isEven  = false;
-        String strNum   = "";
-        int codeSymb    = 0;
+        boolean isEven      = false;
+        int codeSymb        = 0;
+        long nextNum        = 0;
 
         try (BufferedReader bs = new BufferedReader(new InputStreamReader(in))) {
 
             while (codeSymb != -1) {
                 codeSymb = (int) bs.read();
-
                 if (codeSymb >= codeBegin && codeSymb <= codeEnd) {
-                    strNum += (char) codeSymb;
-                } else if (!"".equals(strNum)) {
-                    if (numIsEven(strNum)) {
+                    nextNum *= 10;
+                    nextNum += codeSymb - codeBegin;
+                } else {
+                    if (nextNum != 0 && nextNum % 2 == 0) {
                         isEven = true;
                         break;
                     } else {
-                        strNum = "";
+                        nextNum = 0;
                     }
                 }
             }
-            isEven = numIsEven(strNum);
+            isEven = nextNum != 0 && nextNum % 2 == 0;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
         return isEven;
-    }
-
-    /**
-     * Проверяет что переданое число четное.
-     * @param strNumber стринг проверяемого числа:
-     * @return Истина если четное число.
-     */
-    private boolean numIsEven(String strNumber) {
-
-        if ("".equals(strNumber)) {
-            return false;
-        } else {
-            int number = Integer.valueOf(strNumber);
-            return number == number / 2 * 2;
-        }
     }
 }
