@@ -45,13 +45,10 @@ public class MyIOService {
                         seporatorOn = true;
                     }
 
-                    if (tekStr != null) {
-
-                        for (String str : abuse) {
-                            tekStr = tekStr.replaceAll(str, "");
-                        }
-                        out.write(tekStr.getBytes());
+                    for (String str : abuse) {
+                        tekStr = tekStr.replaceAll(str, "");
                     }
+                    out.write(tekStr.getBytes());
                 }
             }
         }
