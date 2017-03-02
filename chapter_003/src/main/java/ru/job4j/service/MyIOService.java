@@ -5,19 +5,55 @@ import java.io.*;
 /**
  * Class обработки потоков.
  * @author karetskiy
- * @since 29.02.2017
- * @version 2
+ * @since 03.03.2017
+ * @version 3
  */
 public class MyIOService {
 
     /**
      * Код символа ACII - 0 (ноль) с него начинаются цифры.
      */
-    private static int codeBegin = 48;
+    final private static int codeBegin = 48;
     /**
      * Код символа ACII - 9 (девять) на ней заканчиваются цифры.
      */
-    private static int codeEnd = 57;
+    final private static int codeEnd = 57;
+
+    /**
+     * перевод строки
+     */
+    final private static String SEPORATOR = System.lineSeparator();
+
+    /**
+     * Получаем файл, сортируем его по длине строк по возрастанию, результат записываем в другой файл.
+     * @param source входной файл.
+     * @param distance выходной отсортированный файл.
+     */
+    public void sort(File source, File distance) throws IOException {
+
+        long[][] index = new IndexLineSize().createIndex(source);
+
+        try (RandomAccessFile fileS = new RandomAccessFile(distance,"rw")) {
+
+            RandomAccessFile fileR = new RandomAccessFile(source, "r");
+            fileS.setLength(fileR.length());
+
+            for (long[] anchors : index) {
+                if (anchors != null) {
+                    for (long anchor : anchors) {
+
+                        fileR.seek(anchor);
+                        fileS.writeBytes(String.format("%s%s", fileR.readLine(), SEPORATOR));
+                    }
+                }
+            }
+            fileS.close();
+            fileR.close();
+        }
+        catch (IOException e) {
+           e.printStackTrace();
+        }
+    }
 
     /**
      * Убирает из входного потока запрещенные слова и помещает в выходной поток.
@@ -27,9 +63,9 @@ public class MyIOService {
      */
     public void dropAbuses(InputStream in, OutputStream out, String[] abuse) throws IOException {
 
-        final byte[] seporator = System.lineSeparator().getBytes();
         boolean seporatorOn = false;
         String tekStr = "";
+        byte[] byteSeporator = SEPORATOR.getBytes();
 
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in))) {
 
@@ -40,7 +76,7 @@ public class MyIOService {
                 if (tekStr != null) {
 
                     if (seporatorOn) {
-                        out.write(seporator);
+                        out.write(byteSeporator);
                     } else {
                         seporatorOn = true;
                     }
