@@ -70,20 +70,29 @@ public class IndexLineSize {
 
     /**
      * Добавляет якорь в массив.
+     * Если размера массива не достаточно тогда увеличиваем его на x2.
      * @param index текущий индекс строки (длина строки) куда добавляем.
      * @param anchor якорь в файле где начинается блок.
      */
     private void addAnchor(int index, long anchor) {
 
-        long[] anchors = new long[this.anchors[index] == null ? 1 : this.anchors[index].length + 1];
-        int ind = 0;
+        long[] anchors;
 
-        if (this.anchors[index] != null) {
-            for (ind = 0; ind < this.anchors[index].length; ind++) {
-                anchors[ind] = this.anchors[index][ind];
+        if (this.anchors[index] == null) {
+            anchors = new long[1];
+            anchors[0] = anchor;
+        } else {
+
+            anchors = new long[this.anchors[index].length * 2];
+            System.arraycopy(this.anchors[index],0, anchors, 0, this.anchors[index].length);
+
+            for (int ind = 0; ind < anchors.length; ind++) {
+                if (anchors[ind] == 0) {
+                    anchors[ind] = anchor;
+                    break;
+                }
             }
         }
-        anchors[ind++] = anchor;
         this.anchors[index] = anchors;
     }
 
