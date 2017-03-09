@@ -25,37 +25,6 @@ public class MyIOService {
     final private static String SEPORATOR = System.lineSeparator();
 
     /**
-     * Получаем файл, сортируем его по длине строк по возрастанию, результат записываем в другой файл.
-     * @param source входной файл.
-     * @param distance выходной отсортированный файл.
-     */
-    public void sort(File source, File distance) throws IOException {
-
-        long[][] index = new IndexLineSize().createIndex(source);
-
-        try (RandomAccessFile fileS = new RandomAccessFile(distance,"rw")) {
-
-            RandomAccessFile fileR = new RandomAccessFile(source, "r");
-            fileS.setLength(fileR.length());
-
-            for (long[] anchors : index) {
-                if (anchors != null) {
-                    for (long anchor : anchors) {
-
-                        fileR.seek(anchor);
-                        fileS.writeBytes(String.format("%s%s", fileR.readLine(), SEPORATOR));
-                    }
-                }
-            }
-            fileS.close();
-            fileR.close();
-        }
-        catch (IOException e) {
-           e.printStackTrace();
-        }
-    }
-
-    /**
      * Убирает из входного потока запрещенные слова и помещает в выходной поток.
      * @param in входящий символьный поток:
      * @param out выходящий символьный поток:

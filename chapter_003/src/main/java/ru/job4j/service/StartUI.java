@@ -1,5 +1,7 @@
 package ru.job4j.service;
 
+import ru.job4j.sortFile.Service;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -46,7 +48,7 @@ public class StartUI {
                 long timeBegin, timeEnd;
 
                 timeBegin = System.nanoTime();
-                startUI.service.sort(file, new File(path.concat("OUT.txt")));
+                new Service().sort(file, new File(path.concat("OUT.txt")));
                 timeEnd = System.nanoTime();
 
                 System.out.print(String.format("Сервис отработал %s ", timeEnd - timeBegin));
