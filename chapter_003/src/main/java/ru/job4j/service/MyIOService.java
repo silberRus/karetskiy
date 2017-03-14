@@ -13,11 +13,11 @@ public class MyIOService {
     /**
      * Код символа ACII - 0 (ноль) с него начинаются цифры.
      */
-    final private static int codeBegin = 48;
+    private static final int CODE_BEGIN = 48;
     /**
      * Код символа ACII - 9 (девять) на ней заканчиваются цифры.
      */
-    final private static int codeEnd = 57;
+    private static final int CODE_END = 57;
 
     /**
      * перевод строки
@@ -77,9 +77,9 @@ public class MyIOService {
 
             while (codeSymb != -1) {
                 codeSymb = (int) bs.read();
-                if (codeSymb >= codeBegin && codeSymb <= codeEnd) {
+                if (codeSymb >= CODE_BEGIN && codeSymb <= CODE_END) {
                     nextNum *= 10;
-                    nextNum += codeSymb - codeBegin;
+                    nextNum += codeSymb - CODE_BEGIN;
                 } else {
                     if (nextNum != 0 && nextNum % 2 == 0) {
                         isEven = true;

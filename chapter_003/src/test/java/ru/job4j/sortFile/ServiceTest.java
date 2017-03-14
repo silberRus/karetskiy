@@ -3,6 +3,10 @@ package ru.job4j.sortFile;
 import org.junit.Test;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -23,18 +27,18 @@ public class ServiceTest {
     public void sort() throws Exception {
 
         String strSoource =
-                "Строка 1 длина 123456789" + System.lineSeparator() +
-                        "Строка 2 длина 123" + System.lineSeparator() +
-                        "Строка 3 длина 1234" + System.lineSeparator() +
-                        "Строка 4 длина 123" + System.lineSeparator() +
-                        "Строка 5 длина 123456" + System.lineSeparator();
+                "27 Строка 1 длина 123456789" + System.lineSeparator() +
+                        "21 Строка 2 длина 123" + System.lineSeparator() +
+                        "22 Строка 3 длина 1234" + System.lineSeparator() +
+                        "21 Строка 4 длина 123" + System.lineSeparator() +
+                        "24 Строка 5 длина 123456" + System.lineSeparator();
 
         String expect   =
-                "Строка 2 длина 123" + System.lineSeparator() +
-                        "Строка 4 длина 123" + System.lineSeparator() +
-                        "Строка 3 длина 1234" + System.lineSeparator() +
-                        "Строка 5 длина 123456" + System.lineSeparator() +
-                        "Строка 1 длина 123456789" + System.lineSeparator();
+                "21 Строка 2 длина 123" + System.lineSeparator() +
+                        "21 Строка 4 длина 123" + System.lineSeparator() +
+                        "22 Строка 3 длина 1234" + System.lineSeparator() +
+                        "24 Строка 5 длина 123456" + System.lineSeparator() +
+                        "27 Строка 1 длина 123456789" + System.lineSeparator();
 
         File tempR = File.createTempFile("zad3_source",".txt");
         File tempS = File.createTempFile("zad3_dest",".txt");
@@ -52,18 +56,34 @@ public class ServiceTest {
         Service srv = new Service();
         srv.sort(tempR, tempS);
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(tempS))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(tempS)))) {
 
-            String str = "";
-
-            while ((str = bufferedReader.readLine()) != null) {
-                result.concat(str).concat(System.lineSeparator());
+            String line;
+            while ((line = reader.readLine()) != null) {
+                result += line + System.lineSeparator();
             }
-        }
-        catch (IOException e) {
+            reader.close();
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
+
         assertThat(result, is(expect));
     }
 
+    /**
+     * Проверим сортировку текстового файла по длинам строк
+     * Создадим временный файл с неправильной сортировкой, отсортируем и проверим результат.
+     */
+    @Test
+    public void sortFiles() throws Exception {
+
+        String path = "D:\\temp\\111\\conf_m.txt";
+        File outF = File.createTempFile(path + "out",".txt");
+
+        Service srv = new Service();
+        srv.sort(new File(path), outF);
+
+        assertThat(outF.exists(), is(true));
+    }
 }
