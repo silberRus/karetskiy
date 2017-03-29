@@ -3,10 +3,6 @@ package ru.job4j.sortFile;
 import org.junit.Test;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -77,8 +73,7 @@ public class ServiceTest {
      */
     @Test
     public void sortFiles() throws Exception {
-
-        String path = "D:\\temp\\111\\conf_m.txt";
+        String path = "D:\\temp\\111\\conf_s.txt";
         File outF = File.createTempFile(path + "out",".txt");
 
         Service srv = new Service();
