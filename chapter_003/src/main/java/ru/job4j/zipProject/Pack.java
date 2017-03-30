@@ -1,7 +1,6 @@
 package ru.job4j.zipProject;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -33,7 +32,6 @@ public class Pack {
 
         try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(out))){
             addEntry(new File(dest), zout, filter, dest.length() + File.separator.length());
-            zout.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
