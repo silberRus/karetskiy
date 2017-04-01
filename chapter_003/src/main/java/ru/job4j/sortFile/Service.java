@@ -25,10 +25,7 @@ public class Service {
         Index index = new Index(source);
 
         try (RandomAccessFile fileS = new RandomAccessFile(distance,"rw")) {
-        //try (BufferedOutputStream fileS = new BufferedOutputStream(new FileInputStream(source))) {
-
             RandomAccessFile fileR = new RandomAccessFile(source, "r");
-            //BufferedInputStream fileR = new BufferedInputStream(new FileInputStream(source));
 
             String str = fileR.readLine();
             while (str != null) {
