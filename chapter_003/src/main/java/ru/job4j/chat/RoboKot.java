@@ -90,7 +90,7 @@ public class RoboKot {
      * Считывает ответ из файла ответов.
      * @return фраза ответ из файла.
      */
-    private String readRandWord() throws FileNotFoundException {
+    public String readRandWord() throws FileNotFoundException {
 
         String word = "";
 
