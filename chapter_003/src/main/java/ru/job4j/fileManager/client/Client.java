@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 /**
  * Created by silbe on 05.06.2017.
@@ -25,13 +26,17 @@ public class Client implements Socket {
 
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        Scanner scanner = new Scanner(System.in);
+
         String str;
         do {
-            out.println(System.in.read());
-            while (!(str = in.readLine()).isEmpty()) {
-                System.out.println(str);
-            }
-        } while (!socket.isClosed());
+            out.println(scanner.nextLine());
+            str = in.readLine();
+            System.out.println(str);
+        } while (!"".equals(str));
+
+        System.out.println("connection lost");
+        socket.close();
     }
 
     /**

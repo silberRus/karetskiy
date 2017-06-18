@@ -24,6 +24,7 @@ public class Server implements Socket {
     @Override
     public void loop() throws IOException {
 
+
         java.net.Socket socket = new ServerSocket(this.property.port).accept();
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -33,13 +34,16 @@ public class Server implements Socket {
 
         while (!isExit) {
 
-            out.print("wait command ...");
+            //out.print("wait command ...");
             String command = in.readLine();
-            out.print("command: " + command);
+            System.out.println(command);
 
             if ("".equals(command)) {
                 isExit = true;
+                out.println("");
             } else {
+
+                //out.print("command: " + command);
 
                 if (command.startsWith("cd ")) {
                     String[] rStr = command.split(" ");

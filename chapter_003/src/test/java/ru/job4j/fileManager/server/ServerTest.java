@@ -27,10 +27,13 @@ public class ServerTest {
     public void showCurrentDirecotir() throws IOException {
 
         java.net.Socket socket = mock(java.net.Socket.class);
+
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ByteArrayInputStream in = new ByteArrayInputStream("".getBytes());
+
         when(socket.getInputStream()).thenReturn(in);
         when(socket.getOutputStream()).thenReturn(out);
+
         Server server = new Server(new Property(), fs);
         server.loop();
         assertThat(out.toString(), is("main,test"));
