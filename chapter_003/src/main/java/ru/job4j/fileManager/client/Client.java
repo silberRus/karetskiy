@@ -28,12 +28,16 @@ public class Client implements Socket {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         Scanner scanner = new Scanner(System.in);
 
-        String str;
+        String str = null;
+
         do {
-            out.println(scanner.nextLine());
-            str = in.readLine();
-            System.out.println(str);
-        } while (!"".equals(str));
+            out.println(scanner.next());
+
+            while ("".equals(str)) {
+                str = in.readLine();
+                System.out.println(str);
+            }
+        } while (!property.STOP.equals(str));
 
         System.out.println("connection lost");
         socket.close();

@@ -21,6 +21,15 @@ public class Server implements Socket {
         this.fileSystem = fileSystem;
     }
 
+    private void outListString(String[] list,  PrintWriter out) {
+
+        StringBuilder sb = new StringBuilder();
+        for (String line: list) {
+            out.print(line);
+        }
+        out.println("");
+    }
+
     @Override
     public void loop() throws IOException {
 
@@ -34,28 +43,45 @@ public class Server implements Socket {
 
         while (!isExit) {
 
-            //out.print("wait command ...");
             String command = in.readLine();
             System.out.println(command);
 
-            if ("".equals(command)) {
+            if (this.property.STOP.equals(command)) {
                 isExit = true;
-                out.println("");
+                out.println(this.property.STOP);
             } else {
 
-                //out.print("command: " + command);
-
                 if (command.startsWith("cd ")) {
+
                     String[] rStr = command.split(" ");
+                    out.println(String.format("entring %s", rStr[1]));
                     if (rStr.length > 1) {
                         this.fileSystem.enter(rStr[1]);
+                        outListString(this.fileSystem.scan(), out);
                     }
+
                 } else if ("cd .".equals(command)) {
+
+                    out.println("entring begin");
                     this.fileSystem.enterBegin();
+                    outListString(this.fileSystem.scan(), out);
+
                 } else if ("cd ..".equals(command)) {
+
+                    out.println("entring parent");
                     this.fileSystem.enterReturn();
+                    outListString(this.fileSystem.scan(), out);
+
+                } else if ("dir".equals(command)) {
+
+                    out.println("list curent dir");
+                    String[] list = this.fileSystem.scan();
+                    outListString(this.fileSystem.scan(), out);
+
+                } else {
+
+                    out.println("unknown command");
                 }
-            out.println(this.fileSystem.scan().toString());
             }
         }
     }

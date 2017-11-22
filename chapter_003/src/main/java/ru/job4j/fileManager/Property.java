@@ -5,6 +5,7 @@ package ru.job4j.fileManager;
  */
 public class Property {
 
+    final public String STOP = "stop";
     public int port = 5005;
     public String server = "127.0.0.1";
 
@@ -18,6 +19,6 @@ public class Property {
 
     public Property(int port, String server){
         this.server = server;
-        this.port = port;
+        this.port   = port;
     }
 }

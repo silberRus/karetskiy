@@ -11,7 +11,7 @@ public interface FileSystem {
 
     String patch = "";
 
-    String[] scan();
+    public String[] scan();
 
     public boolean enter(String patch);
 
