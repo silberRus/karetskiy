@@ -2,12 +2,13 @@ package ru.job4j.framework;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Class конвертаций коллекций.
  * @author karetskiy
- * @since 23.11.2017
- * @version 1
+ * @since 24.11.2017
+ * @version 2
  */
 public class ConvertList
 {
@@ -56,5 +57,21 @@ public class ConvertList
             }
         }
         return array;
+    }
+
+    /**
+     * Конвертация коллекциb массивов в коллекцию чисел.
+     * @param list - коллекция из которой конвертируем.
+     * @return сконвертированную коллекци чисел.
+     */
+    public List<Integer> convert (List<int[]> list)
+    {
+        ArrayList<Integer> newList = new ArrayList<>();
+        list.forEach(array -> {
+            for (int num: array) {
+                newList.add(num);
+            }
+        });
+        return newList;
     }
 }
