@@ -15,7 +15,6 @@ import static org.junit.Assert.*;
  * @version 2
  * @since 24.11.2017
  */
-
 public class ConvertListTest {
 
     /**
