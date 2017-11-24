@@ -1,25 +1,21 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
-import java.util.StringJoiner;
 
 /**
  * Class Трекера.
  * @author karetskiy
- * @since 28.01.2017
- * @version 3
+ * @since 24.11.2017
+ * @version 4
  */
 public class Tracker {
 
     /**
      * Хранилище заявок.
      */
-    private Item[] items = new Item[5];
-
-    /**
-     * Верхний индекс заявки (незанятый).
-     */
-    private int newIndex = 0;
+    private ArrayList<Item> items = new ArrayList<>();
 
     /**
      * Генератор случайных чисел.
@@ -34,13 +30,7 @@ public class Tracker {
     public Item add(Item item) {
 
         item.setID(String.valueOf(System.currentTimeMillis() + RN.nextInt()));
-        try
-        {
-            this.items[this.newIndex++] = item;
-        } catch (ArrayIndexOutOfBoundsException ar)  {
-            this.newIndex--;
-            System.out.println(String.format("Заявка не добавлена, максимум заявок может быть %s", String.valueOf(items.length)));
-        }
+        items.add(item);
         return item;
     }
 
@@ -48,33 +38,29 @@ public class Tracker {
      * Обновляем заявку в хранилище трекера, по id.
      * @param item - заявка которую обновляем.
      */
-    public void update(Item item) {
-
-        this.items[getIndItem(item)] = item;
+    public void update(Item item)
+    {
+        items.set(getIndItem(item), item);
     }
 
     /**
-     * Удаляем зачку из трекера.
+     * Удаляем заявку из трекера.
      * @param item - заявка которую удаляем.
      */
     public void delete(Item item) {
 
-        newIndex--;
-        for (int ind = getIndItem(item); ind != this.newIndex; ind++) {
-            this.items[ind] = this.items[ind + 1];
-        }
+        items.remove(getIndItem(item));
     }
 
     /**
      * Находим все заявки.
-     * @return все зачвки трекера:
+     * @return все заявки трекера:
      */
-    public Item[] findAll() {
+    public ArrayList<Item> findAll()
+    {
+        ArrayList<Item> findItems = new ArrayList<>();
+        items.forEach(item -> findItems.add(item));
 
-        Item[] findItems = new Item[this.newIndex];
-        for (int ind = 0; ind != this.newIndex; ind++) {
-            findItems[ind] = this.items[ind];
-        }
         return findItems;
     }
 
@@ -83,24 +69,15 @@ public class Tracker {
      * @param name - имя по которому ищем заявки.
      * @return заявки с указанным именем:
      */
-    public Item[] findByName(String name) {
+    public ArrayList findByName(String name) {
 
-        int numFind = 0;
+        ArrayList<Item> findItems = new ArrayList<>();
+        items.forEach(item -> {
+            if(item.getName().equals(name))
+                findItems.add(item);
+        });
 
-        for (int ind = 0; ind != this.newIndex; ind++) {
-            if (this.items[ind].getName().equals(name)) {
-                numFind++;
-            }
-        }
-        Item[] newItems = new Item[numFind];
-        int tekIndFind = 0;
-
-        for (int ind = 0; ind != this.newIndex; ind++) {
-            if (this.items[ind].getName().equals(name)) {
-                newItems[tekIndFind++] = this.items[ind];
-            }
-        }
-        return newItems;
+        return findItems;
     }
 
     /**
@@ -110,10 +87,9 @@ public class Tracker {
      */
     public Item findById(String id) {
 
-        for (int ind = 0; ind != newIndex; ind++) {
-            if (this.items[ind].getID().equals(id)) {
-                return this.items[ind];
-            }
+        for (Item item: items)
+        {
+            if(item.getID().equals(id)) return item;
         }
         return null;
     }
@@ -125,10 +101,14 @@ public class Tracker {
      */
     public int getIndItem(Item item) {
 
-        for (int ind = 0; ind != newIndex; ind++) {
-            if (items[ind].getID().equals(item.getID())) {
-                return ind;
-            }
+        String id = item.getID();
+        int ind = 0;
+        Iterator<Item> iterator = items.iterator();
+
+        while (iterator.hasNext())
+        {
+            if (iterator.next().getID() == id) return ind;
+            ind++;
         }
         return -1;
     }
@@ -138,7 +118,8 @@ public class Tracker {
      * @param index - индекс заявки в массиве.
      * @return заявку из массива:
      */
-    public Item getByIndex(int index) {
-        return this.items[index];
+    public Item getByIndex(int index)
+    {
+        return items.get(index);
     }
 }

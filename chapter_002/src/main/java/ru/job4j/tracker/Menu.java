@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+
 /**
  * Class хранилище меню.
  * @author karetskiy
@@ -79,7 +81,7 @@ public class Menu {
      * @param items список заявок.
      * @return представление списка.
      */
-    private String listItems(Item[] items) {
+    private String listItems(ArrayList<Item> items) {
 
         StringBuilder string = new StringBuilder();
         String rn = System.getProperty("line.separator");
@@ -276,8 +278,8 @@ public class Menu {
          */
         public String execute(Input input, Tracker tracker) {
 
-            Item[] items = tracker.findByName(input.ask("Введите имя:"));
-            return items.length == 0 ? "Завявки с таким именем не найдены" : listItems(items);
+            ArrayList<Item> items = tracker.findByName(input.ask("Введите имя:"));
+            return items.size() == 0 ? "Завявки с таким именем не найдены" : listItems(items);
         }
 
         /**
