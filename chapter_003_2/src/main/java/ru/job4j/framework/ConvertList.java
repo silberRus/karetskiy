@@ -7,8 +7,8 @@ import java.util.function.Consumer;
 /**
  * Class конвертаций коллекций.
  * @author karetskiy
- * @since 24.11.2017
- * @version 2
+ * @since 25.11.2017
+ * @version 3
  */
 public class ConvertList
 {
@@ -45,17 +45,22 @@ public class ConvertList
 
         int[][] array = new int[colums][rows];
 
-        int row = 0; int col = 0;
-        for (Integer num: list)
-        {
-            array[row][col] = num;
+        class Ind { int i = 0; }
 
-            col++;
-            if (col == rows) {
-                col = 0;
-                row++;
+        final Ind row = new Ind();
+        final Ind col = new Ind();
+
+        list.forEach(num ->
+        {
+            array[row.i][col.i] = num;
+            col.i++;
+            if (col.i == rows)
+            {
+                col.i = 0;
+                row.i++;
             }
-        }
+        });
+
         return array;
     }
 
