@@ -1,7 +1,5 @@
 package ru.job4j.changingmoney;
 
-import sun.misc.resources.Messages_pt_BR;
-
 /**
  * Class автомата размена денег.
  * @author karetskiy
@@ -13,12 +11,12 @@ public class Machine {
     /**
      * Виды монет с которыми работает разменник.
      */
-    final private Variant support;
+    private final Variant support;
 
     /**
      * При создании сразу определяем какие монеты можно пихать в автомат.
      */
-    public Machine (Variant support) {
+    public Machine(Variant support) {
 
         this.support = support;
     }
