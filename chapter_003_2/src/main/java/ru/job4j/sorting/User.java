@@ -3,20 +3,20 @@ package ru.job4j.sorting;
 /**
  * Class пользователь.
  * @author karetskiy
- * @since 26.11.2017
- * @version 1
+ * @since 27.11.2017
+ * @version 2
  */
 class User implements Comparable<User>{
 
     /**
      * id имя и город пользователя.
      */
-    private String name;
+    String name;
 
     /**
      * Возраст пользователя.
      */
-    private int age;
+    int age;
 
     /**
      * Конструктор.
