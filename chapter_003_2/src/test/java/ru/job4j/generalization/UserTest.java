@@ -21,8 +21,6 @@ public class UserTest {
     public void setId() throws Exception {
 
         User user = new User("Ваня", "Даосити");
-        user.setId(3);
-        assertThat(user.toString(), is("#3 Ваня (Даосити)"));
-
+        assertThat(user.toString(), is("Ваня (Даосити)"));
     }
 }

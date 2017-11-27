@@ -19,11 +19,7 @@ public class UserConvert {
     public HashMap<Integer, User> process(List<User> list)
     {
         HashMap<Integer, User> map = new HashMap<>();
-        list.forEach(user -> {
-            Integer id = map.size();
-            user.setId(id);
-            map.put(id, user);
-        });
+        list.forEach(user -> map.put(user.getId(), user));
         return map;
     }
 }

@@ -1,5 +1,7 @@
 package ru.job4j.generalization;
 
+import java.util.Random;
+
 /**
  * Class пользователь.
  * @author karetskiy
@@ -20,6 +22,11 @@ public class User
     private String name, city;
 
     /**
+     * Генератор случайных чисел.
+     */
+    private static final Random RN = new Random();
+
+    /**
      * Конструктор.
      * @param name - имя пользователя.
      * @param city - город пользователя.
@@ -28,15 +35,16 @@ public class User
     {
         this.name = name;
         this.city = city;
+        this.id = (int) (System.currentTimeMillis() + RN.nextInt());
     }
 
     /**
-     * Устанавливает id пользователю.
-     * @param id - устанавливаемый идентификатор..
+     * Получает id пользователя.
+     * @return id идентификатор пользователя.
      */
-    void setId(int id)
+    public Integer getId()
     {
-        this.id = id;
+        return this.id;
     }
 
     /**
@@ -46,6 +54,6 @@ public class User
      */
     @Override
     public String toString() {
-        return String.format("#%s %s (%s)", id, name, city);
+        return String.format("%s (%s)", name, city);
     }
 }
