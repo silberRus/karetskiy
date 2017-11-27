@@ -19,9 +19,9 @@ public class ConvertList {
     public List<Integer> toList(int[][] array) {
         List<Integer> list = new ArrayList();
 
-        for (int col = 0; col < array.length; col++) {
-            for (int row = 0; row < array[col].length; row++) {
-                list.add(array[col][row]);
+        for (int[] row: array) {
+            for (int cell: row) {
+                list.add(cell);
             }
         }
         return list;
