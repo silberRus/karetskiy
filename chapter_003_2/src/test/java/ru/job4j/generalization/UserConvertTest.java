@@ -32,6 +32,6 @@ public class UserConvertTest {
         UserConvert convert = new UserConvert();
         HashMap<Integer, User> map = convert.process(list);
 
-        assertThat(map.toString(), is("{0=#0 Ваня (Доваосити), 1=#1 Игорь (Муйне), 2=#2 Вика (Пуорто)}"));
+        assertThat(map.size(), is(3));
     }
 }
