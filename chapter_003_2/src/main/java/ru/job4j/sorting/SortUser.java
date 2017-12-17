@@ -48,8 +48,10 @@ public class SortUser {
         users.sort(new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {
-                int forName = o1.name.compareTo(o2.name);
-                return forName == 0 ? Integer.compare(o1.age, o2.age) : forName;
+
+                int rsl = o2.age - o1.age;
+                return rsl != 0 ? rsl : o1.name.compareTo(o2.name);
+
             }
         });
         return users;
