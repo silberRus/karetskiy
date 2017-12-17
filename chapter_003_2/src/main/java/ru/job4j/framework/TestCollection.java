@@ -82,7 +82,7 @@ public class TestCollection
      */
     public static void main(String[] args)
     {
-        int amount = 10000;
+        int amount = 1000;
         TestCollection testCollection = new TestCollection();
 
         System.out.println(String.format("Amount = %s", amount));
