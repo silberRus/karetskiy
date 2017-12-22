@@ -52,10 +52,7 @@ public class Map {
      */
     public void deleteAccountFromUser(User user, Account account) {
 
-        List<Account> acc = getUserAccounts(user);
-        if (acc != null) {
-            acc.remove(account);
-        }
+        this.getUserAccounts(user).remove(account);
     }
 
     /**

@@ -62,6 +62,6 @@ public class Account {
     @Override
     public int hashCode() {
 
-        return Objects.hash(requisites);
+        return Objects.hash(requisites, value);
     }
 }
