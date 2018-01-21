@@ -34,6 +34,7 @@ public class MatrixIterator implements Iterator<Integer> {
 
         this.values = values;
         this.size = size();
+
     }
 
     /**
@@ -79,6 +80,6 @@ public class MatrixIterator implements Iterator<Integer> {
             }
             ind += value.length;
         }
-        return null;
+        throw new java.util.NoSuchElementException();
     }
 }
