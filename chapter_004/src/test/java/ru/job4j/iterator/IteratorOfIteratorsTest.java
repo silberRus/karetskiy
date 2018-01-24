@@ -97,5 +97,14 @@ public class IteratorOfIteratorsTest {
         assertThat(it.next(), is(3));
         it.next();
     }
+
+    @Test
+    public void  itHasNextShouldBeTrue() {
+
+        Iterator<Integer> it1 = Arrays.asList(1, 2).iterator();
+        Iterator<Iterator<Integer>> input = Arrays.asList(it1).iterator();
+
+        assertThat(input.hasNext(), is(true));
+    }
 }
 

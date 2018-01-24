@@ -5,8 +5,8 @@ import java.util.Iterator;
 /**
  * Class итератор четных чисел в массиве.
  * @author karetskiy
- * @since 21.01.2018
- * @version 1
+ * @since 24.01.2018
+ * @version 2
  */
 public class EvenNumbersIterator implements Iterator<Integer> {
 
@@ -21,43 +21,21 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     private int index = 0;
 
     /**
-     * Размер четных чисел.
-     */
-    private final int size;
-
-    /**
      * Конструктор.
      * @param values - массив значений.
-     *
      */
     public EvenNumbersIterator(final int[] values) {
-
         this.values = values;
-        this.size = size();
     }
 
     /**
-     * Вычисляем количество четных чисел.
-     * @return количество четных чисел.
-     *
-     */
-    private final int size() {
-
-        int size = 0;
-        for (int value : this.values) {
-            if (value%2 == 0) size++;
-        }
-        return size;
-    }
-
-    /**
-     * Ищем следующее четное число.
+     * Ищем следующее четное число и возвращаем индекс его положения.
+     * -1 если не нашли.
      * @return индекс в массиве со следующим четным числом.
-     *
      */
     private int nextEvenIndex() {
 
-        if (index + 1 < values.length) {
+        if (index != values.length) {
             for (int ind = index + 1; ind < values.length; ind++) {
                 if (this.values[ind] % 2 == 0) {
                     return ind;
@@ -70,18 +48,15 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     /**
      * Проверяем возможность сдвигать корретку.
      * @return true если можно.
-     *
      */
     @Override
     public boolean hasNext() {
-
-        return nextEvenIndex() >= 0;
+        return nextEvenIndex() != -1;
     }
 
     /**
      * Сдвигаем курсор по четным числам и возвращаем значение.
      * @return значение на котором стоит курсор.
-     *
      */
     @Override
     public Integer next() {

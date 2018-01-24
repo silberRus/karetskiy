@@ -5,8 +5,8 @@ import java.util.Iterator;
 /**
  * Class итератор двумерных массивов.
  * @author karetskiy
- * @since 21.01.2018
- * @version 1
+ * @since 24.01.2018
+ * @version 2
  */
 public class MatrixIterator implements Iterator<Integer> {
 
@@ -16,70 +16,52 @@ public class MatrixIterator implements Iterator<Integer> {
     private final int[][] values;
 
     /**
-     * Крусор в массивах.
+     * Крусоры в массивах, первый элемент на масиве, второй внутри массива.
      */
-    private int index = 0;
-
-    /**
-     * Размер массвов.
-     */
-    private final int size;
+    private int[] cursor = {0,-1};
 
     /**
      * Конструктор.
      * @param values - массив значений.
-     *
      */
     public MatrixIterator(final int[][] values) {
-
         this.values = values;
-        this.size = size();
-
     }
 
     /**
-     * Вычисляем размер массивов.
-     * @return размер массивов.
-     *
+     * Получаем следующий индекс массива.
+     * @return следующий индекс.
      */
-    private final int size() {
+    private int[] nextInd() {
 
-        int size = 0;
-        for (int[] value : this.values) {
-            size += value.length;
+        int[] ind = {cursor[0], cursor[1]};
+        ind[1]++;
+
+        if (ind[1] == values[ind[0]].length) {
+            ind[0]++;
+            ind[1] = 0;
         }
-        return size;
+        return ind[0] == values.length ? null : ind;
     }
 
     /**
      * Проверяем возможность сдвигать корретку.
      * @return true если можно.
-     *
      */
     @Override
     public boolean hasNext() {
-
-        return this.size > this.index;
+        return nextInd() != null;
     }
 
     /**
      * Сдвигаем курсор и возвращаем значение.
      * @return значение на котором стоит курсор.
-     *
      */
     @Override
     public Integer next() {
 
-        int ind = 0;
-
-        for (int[] value : this.values) {
-
-            if (ind + value.length > this.index) {
-                this.index++;
-                return value[this.index - ind - 1];
-            }
-            ind += value.length;
-        }
-        throw new java.util.NoSuchElementException();
+        cursor = nextInd();
+        if (cursor == null) throw new java.util.NoSuchElementException();
+        return values[cursor[0]][cursor[1]];
     }
 }
