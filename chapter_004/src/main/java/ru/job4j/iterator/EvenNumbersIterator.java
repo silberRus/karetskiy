@@ -18,7 +18,7 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     /**
      * Крусор.
      */
-    private int index = 0;
+    private int index = -1;
 
     /**
      * Конструктор.
