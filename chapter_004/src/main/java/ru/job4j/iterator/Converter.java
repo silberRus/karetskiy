@@ -39,7 +39,7 @@ public class Converter {
             if (!isEmpty(current) && current.hasNext()) break;
             current = it.next();
         }
-        return current.hasNext();
+        return current != null && current.hasNext();
     }
 
     /**
