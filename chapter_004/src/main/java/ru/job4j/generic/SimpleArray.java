@@ -1,17 +1,19 @@
 package ru.job4j.generic;
 
+import java.util.Arrays;
+
 /**
  * Class коллекции объектов.
  * @author karetskiy
- * @since 10.03.2018
- * @version 1
+ * @since 04.04.2018
+ * @version 2
  */
 public class SimpleArray<T> {
 
     /**
      * Массив для хранения объектов коллекции.
      */
-    private Object[] objects;
+    private Object[] objects = new Object[0];
     /**
      * Указывает индекс самого поледнего элемента в массиве.
      */
@@ -27,22 +29,21 @@ public class SimpleArray<T> {
     }
 
     /**
+     * Увеличивает массив объектов в 1.5 раза.
+     */
+    private void ensureCapacity() {
+
+        this.objects = Arrays.copyOf(this.objects, (lastIndex + 2) * 2);
+    }
+
+    /**
      * Добавление элемента в коллекцию.
      * @param model - добавляемый объект в коллекцию.
      */
     public void add(T model) {
 
-        if (this.objects == null || lastIndex == this.objects.length - 1) {
-
-            Object[] newObj = new Object[(lastIndex + 2) * 2];
-            if (objects != null) {
-                IteratotorArray<T> it = new IteratotorArray(this);
-                int ind = 0;
-                while (it.hasNext()) {
-                    newObj[ind++] = it.next();
-                }
-            }
-            this.objects = newObj;
+        if (lastIndex == this.objects.length - 1) {
+            ensureCapacity();
         }
         lastIndex++;
         this.objects[lastIndex] = model;
@@ -58,6 +59,7 @@ public class SimpleArray<T> {
             for (int ind = index; ind < lastIndex; ind++) {
                 this.objects[ind] = this.objects[ind + 1];
             }
+            this.objects[lastIndex] = null;
             lastIndex--;
         }
     }
