@@ -7,15 +7,15 @@ import java.util.NoSuchElementException;
 /**
  * Class итератор для листа коллекции.
  * @author karetskiy
- * @since 13.04.2018
- * @version 1
+ * @since 18.04.2018
+ * @version 2
  */
-public class MyArrayIterator<T> implements Iterator<T>{
+public class MyIterator<T> implements Iterator<T>{
 
     /**
      * Текущая коллекция.
      */
-    private MyArrayList<T> myArrayList;
+    private MyList<T> myList;
     /**
      * Текущий курсор коллекции.
      */
@@ -28,14 +28,23 @@ public class MyArrayIterator<T> implements Iterator<T>{
 
     /**
      * Конструктуор класса.
-     * @param myArrayList - коллекция итератора.
+     * @param myList - коллекция итератора.
      * @param expectedModCount - состояние коллекции на момент создания.
      *
      */
-    public MyArrayIterator(MyArrayList<T> myArrayList, int expectedModCount) {
+    public MyIterator(MyList<T> myList, int expectedModCount) {
 
-        this.myArrayList = myArrayList;
+        this.myList = myList;
         this.expectedModCount = expectedModCount;
+    }
+
+    /**
+     * Проверяет изменилась коллекция или неn.
+     * вызывает исключение, если коллекция изменилась.
+     *
+     */
+    private void verifyModCount() {
+        if (myList.getModCount() != expectedModCount) throw new ConcurrentModificationException();
     }
 
     /**
@@ -46,8 +55,8 @@ public class MyArrayIterator<T> implements Iterator<T>{
     @Override
     public boolean hasNext() throws ConcurrentModificationException{
 
-        if (myArrayList.getModCount() != expectedModCount) throw new ConcurrentModificationException();
-        return cursor < myArrayList.getLastIndex();
+        verifyModCount();
+        return cursor <= myList.getLastIndex();
     }
 
     /**
@@ -58,9 +67,9 @@ public class MyArrayIterator<T> implements Iterator<T>{
     @Override
     public T next() throws ConcurrentModificationException, NoSuchElementException {
 
-        if (myArrayList.getModCount() != expectedModCount) throw new ConcurrentModificationException();
+        verifyModCount();
         if (!hasNext()) throw new NoSuchElementException();
 
-        return myArrayList.get(cursor++);
+        return myList.get(cursor++);
     }
 }
