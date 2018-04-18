@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Class реализация листа коллекции на основе массивов.
  * @author karetskiy
  * @since 18.04.2018
- * @version 2
+ * @version 3
  */
 public class MyArrayList<E> extends MyList<E>{
 
@@ -43,4 +43,18 @@ public class MyArrayList<E> extends MyList<E>{
         return (E) objects[index];
     }
 
+    /**
+     * Возвращает последний элемент коллекии.
+     * @return последний элемент коллекции.
+     */
+    public E getLast() {
+        return get(size - 1);
+    }
+
+    /**
+     * Удаляет последний элемент в коллекии.
+     */
+    public void deleteLast() {
+        objects[size--] = null;
+    }
 }

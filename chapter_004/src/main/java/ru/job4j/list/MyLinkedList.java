@@ -4,10 +4,9 @@ package ru.job4j.list;
  * Class коллекции на основе связанных объектов.
  * @author karetskiy
  * @since 18.04.2018
- * @version 1
+ * @version 2
  */
 public class MyLinkedList<E> extends MyList<E> {
-
 
     /**
      * первый элемент ноды.
@@ -113,5 +112,14 @@ public class MyLinkedList<E> extends MyList<E> {
             current = current.getNext();
         }
         return current.getElement();
+    }
+
+    /**
+     * Удаляет первый элемент в коллекии.
+     */
+    public void deleteFirst() {
+
+        first.prev = null;
+        first = first.next;
     }
 }
