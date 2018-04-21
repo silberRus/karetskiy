@@ -1,5 +1,6 @@
 package ru.job4j.set;
 
+import ru.job4j.list.MyArrayList;
 import ru.job4j.list.MyLinkedList;
 
 /**
@@ -8,7 +9,7 @@ import ru.job4j.list.MyLinkedList;
  * @since 21.04.2018
  * @version 1
  */
-public class MyArraySet<T> extends MyLinkedList<T> {
+public class MyArraySet<T> extends MyArrayList<T> {
 
     /**
      * Добавляет элемент в сет.
