@@ -6,25 +6,25 @@ import java.util.ConcurrentModificationException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-public class MyListTest {
+public class ListTest {
 
-    private void initList(MyList<Integer> myList) {
+    private void initList(List<Integer> list) {
 
-        myList.add(2);
-        myList.add(1);
-        myList.add(7);
+        list.add(2);
+        list.add(1);
+        list.add(7);
     }
 
-    private MyArrayList getNewMyArrayList() {
+    private ArrayList getNewMyArrayList() {
 
-        MyArrayList<Integer> myArrayList = new MyArrayList<Integer>();
+        ArrayList<Integer> myArrayList = new ArrayList<Integer>();
         initList(myArrayList);
         return myArrayList;
     }
 
-    private MyLinkedList getNewMyLinkedList() {
+    private LinkedList getNewMyLinkedList() {
 
-        MyLinkedList<Integer> myLinkedList = new MyLinkedList<>();
+        LinkedList<Integer> myLinkedList = new LinkedList<>();
         initList(myLinkedList);
         return myLinkedList;
     }
@@ -53,11 +53,11 @@ public class MyListTest {
     @Test
     public void getModCount() {
 
-        MyArrayList<Integer> myArrayList = getNewMyArrayList();
+        ArrayList<Integer> myArrayList = getNewMyArrayList();
         myArrayList.add(1);
         myArrayList.add(1);
 
-        MyLinkedList<Integer> myLinkedList = getNewMyLinkedList();
+        LinkedList<Integer> myLinkedList = getNewMyLinkedList();
         myLinkedList.add(1);
         myLinkedList.add(1);
 
@@ -68,7 +68,7 @@ public class MyListTest {
     @Test(expected = ConcurrentModificationException.class)
     public void ConcurrentModificationException_arrayList(){
 
-        MyArrayList<Integer> myArrayList = getNewMyArrayList();
+        ArrayList<Integer> myArrayList = getNewMyArrayList();
         for (Object number:myArrayList) {
             myArrayList.add(3);
         }
@@ -77,7 +77,7 @@ public class MyListTest {
     @Test(expected = ConcurrentModificationException.class)
     public void ConcurrentModificationException_linkedList(){
 
-        MyLinkedList<Integer> myLinkedList = getNewMyLinkedList();
+        LinkedList<Integer> myLinkedList = getNewMyLinkedList();
         for (Object number:myLinkedList) {
             myLinkedList.add(3);
         }

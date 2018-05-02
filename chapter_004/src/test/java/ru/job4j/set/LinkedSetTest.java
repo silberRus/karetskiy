@@ -1,18 +1,16 @@
 package ru.job4j.set;
 
 import org.junit.Test;
-import ru.job4j.list.MyLinkedList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
-public class MyLinkedSetTest {
+public class LinkedSetTest {
 
     @Test
     public void add() {
 
-        MyLinkedSet<Integer> mySet = new MyLinkedSet<>();
+        LinkedSet<Integer> mySet = new LinkedSet<>();
 
         mySet.add(1);
         mySet.add(2);

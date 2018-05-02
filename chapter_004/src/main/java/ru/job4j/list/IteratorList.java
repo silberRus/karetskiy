@@ -10,12 +10,12 @@ import java.util.NoSuchElementException;
  * @since 18.04.2018
  * @version 2
  */
-public class MyIterator<T> implements Iterator<T>{
+public class IteratorList<T> implements java.util.Iterator<T> {
 
     /**
      * Текущая коллекция.
      */
-    private MyList<T> myList;
+    private List<T> list;
     /**
      * Текущий курсор коллекции.
      */
@@ -28,13 +28,13 @@ public class MyIterator<T> implements Iterator<T>{
 
     /**
      * Конструктуор класса.
-     * @param myList - коллекция итератора.
+     * @param list - коллекция итератора.
      * @param expectedModCount - состояние коллекции на момент создания.
      *
      */
-    public MyIterator(MyList<T> myList, int expectedModCount) {
+    public IteratorList(List<T> list, int expectedModCount) {
 
-        this.myList = myList;
+        this.list = list;
         this.expectedModCount = expectedModCount;
     }
 
@@ -44,7 +44,7 @@ public class MyIterator<T> implements Iterator<T>{
      *
      */
     private void verifyModCount() {
-        if (myList.getModCount() != expectedModCount) throw new ConcurrentModificationException();
+        if (list.getModCount() != expectedModCount) throw new ConcurrentModificationException();
     }
 
     /**
@@ -56,7 +56,7 @@ public class MyIterator<T> implements Iterator<T>{
     public boolean hasNext() throws ConcurrentModificationException{
 
         verifyModCount();
-        return cursor <= myList.getLastIndex();
+        return cursor <= list.getLastIndex();
     }
 
     /**
@@ -70,6 +70,6 @@ public class MyIterator<T> implements Iterator<T>{
         verifyModCount();
         if (!hasNext()) throw new NoSuchElementException();
 
-        return myList.get(cursor++);
+        return list.get(cursor++);
     }
 }

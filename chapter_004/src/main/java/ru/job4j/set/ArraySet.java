@@ -1,14 +1,14 @@
 package ru.job4j.set;
 
-import ru.job4j.list.MyLinkedList;
+import ru.job4j.list.ArrayList;
 
 /**
- * Class сета на основе асоциативного списка.
+ * Class сета на основе массива.
  * @author karetskiy
  * @since 21.04.2018
  * @version 1
  */
-public class MyLinkedSet<T> extends MyLinkedList<T> {
+public class ArraySet<T> extends ArrayList<T> {
 
     /**
      * Добавляет элемент в сет.

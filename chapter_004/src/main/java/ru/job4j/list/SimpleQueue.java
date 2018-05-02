@@ -11,7 +11,7 @@ public class SimpleQueue<T> {
     /**
      * Коллекция для хранения очереди.
      */
-    private MyLinkedList<T> store = new MyLinkedList<>();
+    private LinkedList<T> store = new LinkedList<>();
 
     /**
      * Возвращает следующий элемент из очереди и удаляет его в очереди.

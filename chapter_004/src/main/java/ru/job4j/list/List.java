@@ -1,14 +1,12 @@
 package ru.job4j.list;
 
-import java.util.Iterator;
-
 /**
  * Абстрактный Class коллекции для других реализаций списков.
  * @author karetskiy
  * @since 18.04.2018
  * @version 1
  */
-public abstract class MyList<E> implements Iterable<E>{
+public abstract class List<E> implements Iterable<E>{
 
     /**
      * Размер коллекции.
@@ -75,7 +73,7 @@ public abstract class MyList<E> implements Iterable<E>{
      * @return итератор коллекции.
      */
     @Override
-    public Iterator<E> iterator() {
-        return new MyIterator(this, modCount);
+    public java.util.Iterator iterator() {
+        return new IteratorList(this, modCount);
     }
 }

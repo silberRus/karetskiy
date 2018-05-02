@@ -4,14 +4,13 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
-public class MyArraySetTest {
+public class ArraySetTest {
 
     @Test
     public void add() {
 
-        MyArraySet<String> mySet = new MyArraySet<>();
+        ArraySet<String> mySet = new ArraySet<>();
 
         mySet.add("first");
         mySet.add("second");

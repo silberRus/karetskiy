@@ -6,7 +6,7 @@ package ru.job4j.list;
  * @since 18.04.2018
  * @version 2
  */
-public class MyLinkedList<E> extends MyList<E> {
+public class LinkedList<E> extends List<E> {
 
     /**
      * первый элемент ноды.

@@ -11,7 +11,7 @@ public class SimpleStack<T> {
     /**
      * Коллекция для стека.
      */
-    private MyArrayList<T> store = new MyArrayList<>();
+    private ArrayList<T> store = new ArrayList<>();
 
     /**
      * Возвращает следующий элемент из стека и удаляет его в коллекции.

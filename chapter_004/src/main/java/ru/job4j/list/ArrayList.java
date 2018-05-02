@@ -8,7 +8,7 @@ import java.util.Arrays;
  * @since 18.04.2018
  * @version 3
  */
-public class MyArrayList<E> extends MyList<E>{
+public class ArrayList<E> extends List<E> {
 
     /**
      * массив для хранения элементов коллекции.
