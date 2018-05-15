@@ -5,8 +5,8 @@ import java.util.Arrays;
 /**
  * Class реализация листа коллекции на основе массивов.
  * @author karetskiy
- * @since 18.04.2018
- * @version 3
+ * @since 16.05.2018
+ * @version 4
  */
 public class ArrayList<E> extends List<E> {
 
@@ -27,11 +27,25 @@ public class ArrayList<E> extends List<E> {
      * @param value - добовляемый элемент.
      *
      */
-    public void add(E value)
+    public boolean add(E value)
     {
         if (size == objects.length) ensureCapacity();
         objects[size] = value;
-        super.add(value);
+        return super.add(value);
+    }
+
+    /**
+     * Удаляет элемент по индексу из коллекции.
+     * @param index - индекс элемента который нужно удалить.
+     */
+    public void remove(int index) {
+
+        if (index != getLastIndex()) {
+            for (int ind = index; ind < getLastIndex(); ind++) {
+                this.objects[ind] = this.objects[ind + 1];
+            }
+        }
+        deleteLast();
     }
 
     /**
@@ -55,6 +69,7 @@ public class ArrayList<E> extends List<E> {
      * Удаляет последний элемент в коллекии.
      */
     public void deleteLast() {
-        objects[size--] = null;
+        objects[size - 1] = null;
+        size--;
     }
 }

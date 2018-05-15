@@ -23,10 +23,11 @@ public abstract class List<E> implements Iterable<E>{
      * @param value - добовляемый элемент.
      *
      */
-    public void add(E value)
+    public boolean add(E value)
     {
         size++;
         modCount++;
+        return true;
     }
 
     /**
@@ -46,8 +47,10 @@ public abstract class List<E> implements Iterable<E>{
         StringBuilder sb = new StringBuilder();
 
         for(E item: this) {
-            sb.append(item.toString());
-            sb.append(";");
+            if (item != null) {
+                sb.append(item.toString());
+                sb.append(";");
+            }
         }
         return sb.toString();
     }

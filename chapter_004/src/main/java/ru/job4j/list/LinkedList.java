@@ -85,7 +85,7 @@ public class LinkedList<E> extends List<E> {
      * @param item - добавляемый элемент коллекции.
      *
      */
-    public void add(E item) {
+    public boolean add(E item) {
 
         Node<E> newElem = new Node<E>(last, item,null);
 
@@ -96,7 +96,7 @@ public class LinkedList<E> extends List<E> {
         }
         last = newElem;
 
-        super.add(item);
+        return super.add(item);
     }
 
     /**

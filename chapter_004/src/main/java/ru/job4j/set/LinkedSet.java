@@ -15,7 +15,7 @@ public class LinkedSet<T> extends LinkedList<T> {
      * При добавлении проверяет чтобы элемент был уникальным.
      */
     @Override
-    public void add(T item) {
+    public boolean add(T item) {
 
         boolean find = false;
 
@@ -26,5 +26,6 @@ public class LinkedSet<T> extends LinkedList<T> {
             }
         }
         if (!find) super.add(item);
+        return !find;
     }
 }
