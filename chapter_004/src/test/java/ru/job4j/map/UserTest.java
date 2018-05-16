@@ -21,6 +21,7 @@ public class UserTest {
         map.put(user1, "man");
         map.put(user2, "man");
 
+        System.out.println(user1.equals(user2));
         System.out.println(map);
     }
 }
