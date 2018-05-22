@@ -5,8 +5,17 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class LinkedSetTest {
 
+    /**
+     * Тестируем сет.
+     */
     @Test
     public void add() {
 

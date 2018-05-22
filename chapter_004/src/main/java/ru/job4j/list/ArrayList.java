@@ -7,6 +7,7 @@ import java.util.Arrays;
  * @author karetskiy
  * @since 16.05.2018
  * @version 4
+ * @param <E> тип списка.
  */
 public class ArrayList<E> extends List<E> {
 
@@ -19,18 +20,20 @@ public class ArrayList<E> extends List<E> {
      * Увеличивает массив объектов в 2 раза.
      */
     private void ensureCapacity() {
-        objects = Arrays.copyOf(objects, (size + 1)  * 2);
+        objects = Arrays.copyOf(objects, (getSize() + 1)  * 2);
     }
 
     /**
      * Добавляет элемент в коллекцию.
      * @param value - добовляемый элемент.
-     *
+     * @return true если значение было добавлено в список.
      */
-    public boolean add(E value)
-    {
-        if (size == objects.length) ensureCapacity();
-        objects[size] = value;
+    public boolean add(E value) {
+
+        if (getSize() == objects.length) {
+            ensureCapacity();
+        }
+        objects[getSize()] = value;
         return super.add(value);
     }
 
@@ -62,14 +65,14 @@ public class ArrayList<E> extends List<E> {
      * @return последний элемент коллекции.
      */
     public E getLast() {
-        return get(size - 1);
+        return get(getSize() - 1);
     }
 
     /**
      * Удаляет последний элемент в коллекии.
      */
     public void deleteLast() {
-        objects[size - 1] = null;
-        size--;
+        objects[getSize() - 1] = null;
+        subOneSize();
     }
 }

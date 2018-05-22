@@ -7,6 +7,7 @@ import static java.lang.Math.abs;
  * @author karetskiy
  * @since 16.05.2018
  * @version 1
+ * @param <T> тип хешсета.
  */
 public class HashTableSet<T> {
 
@@ -81,7 +82,7 @@ public class HashTableSet<T> {
         for (int ind = 0; ind < newHashTable.length; ind++) {
             newHashTable[ind] = new ArraySet<>();
         }
-        for(ArraySet<T> hashLine: hashTable) {
+        for (ArraySet<T> hashLine: hashTable) {
             hashLine.forEach(t->newHashTable[hashCode(t)].add(t));
         }
         hashTable = newHashTable;
@@ -95,7 +96,7 @@ public class HashTableSet<T> {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        for(ArraySet<T> arraySet: hashTable) {
+        for (ArraySet<T> arraySet: hashTable) {
             if (arraySet.getLastIndex() >= 0) {
                 sb.append(arraySet.toString());
             }

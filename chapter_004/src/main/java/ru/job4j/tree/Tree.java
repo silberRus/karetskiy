@@ -10,6 +10,7 @@ import java.util.Queue;
  * @author karetskiy
  * @since 21.05.2018
  * @version 1
+ * @param <E> тип значений дерева.
  */
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 

@@ -36,7 +36,9 @@ public class Converter {
     private boolean nextIterator(Iterator<Iterator<Integer>> it) {
 
         while (it.hasNext()) {
-            if (!isEmpty(current) && current.hasNext()) break;
+            if (!isEmpty(current) && current.hasNext()) {
+                break;
+            }
             current = it.next();
         }
         return current != null && current.hasNext();
@@ -60,7 +62,9 @@ public class Converter {
             public Integer next() {
 
                 if (isEmpty(current)) {
-                    if (!nextIterator(it)) throw new NoSuchElementException();
+                    if (!nextIterator(it)) {
+                        throw new NoSuchElementException();
+                    }
                 }
                 return current.next();
             }

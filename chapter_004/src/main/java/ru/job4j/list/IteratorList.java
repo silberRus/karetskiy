@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
  * @author karetskiy
  * @since 18.04.2018
  * @version 2
+ * @param <T> тип списка итератора.
  */
 public class IteratorList<T> implements java.util.Iterator<T> {
 
@@ -29,7 +30,6 @@ public class IteratorList<T> implements java.util.Iterator<T> {
      * Конструктуор класса.
      * @param list - коллекция итератора.
      * @param expectedModCount - состояние коллекции на момент создания.
-     *
      */
     public IteratorList(List<T> list, int expectedModCount) {
 
@@ -43,7 +43,10 @@ public class IteratorList<T> implements java.util.Iterator<T> {
      *
      */
     private void verifyModCount() {
-        if (list.getModCount() != expectedModCount) throw new ConcurrentModificationException();
+
+        if (list.getModCount() != expectedModCount) {
+            throw new ConcurrentModificationException();
+        }
     }
 
     /**
@@ -52,7 +55,7 @@ public class IteratorList<T> implements java.util.Iterator<T> {
      *
      */
     @Override
-    public boolean hasNext() throws ConcurrentModificationException{
+    public boolean hasNext() throws ConcurrentModificationException {
 
         verifyModCount();
         return cursor <= list.getLastIndex();
@@ -67,8 +70,9 @@ public class IteratorList<T> implements java.util.Iterator<T> {
     public T next() throws ConcurrentModificationException, NoSuchElementException {
 
         verifyModCount();
-        if (!hasNext()) throw new NoSuchElementException();
-
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
         return list.get(cursor++);
     }
 }

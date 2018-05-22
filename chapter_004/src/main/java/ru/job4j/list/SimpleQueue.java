@@ -5,6 +5,7 @@ package ru.job4j.list;
  * @author karetskiy
  * @since 18.04.2018
  * @version 1
+ * @param <T> тип очереди.
  */
 public class SimpleQueue<T> {
 

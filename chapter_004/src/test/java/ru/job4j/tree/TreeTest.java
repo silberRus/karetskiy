@@ -2,7 +2,7 @@ package ru.job4j.tree;
 
 import org.junit.Test;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 /**
  * @author Petr Arsentev (parsentev@yandex.ru)
@@ -11,6 +11,9 @@ import static org.junit.Assert.*;
  */
 public class TreeTest {
 
+    /**
+     * Тестируем дерево.
+     */
     @Test
     public void when6ElFindLastThen6() {
         Tree<Integer> tree = new Tree<>(1);
@@ -25,6 +28,9 @@ public class TreeTest {
         );
     }
 
+    /**
+     * Тестируем дерево.
+     */
     @Test
     public void when6ElFindNotExitThenOptionEmpty() {
         Tree<Integer> tree = new Tree<>(1);

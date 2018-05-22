@@ -5,6 +5,7 @@ package ru.job4j.list;
  * @author karetskiy
  * @since 19.04.2018
  * @version 1
+ * @param <T> тип значения ноды.
  */
 public class Node<T> {
 
@@ -12,12 +13,12 @@ public class Node<T> {
     /**
      * Значение ноды.
      */
-    T value;
+    private T value;
 
     /**
      * Следующая нода.
      */
-    Node<T> next;
+    private Node<T> next;
 
     /**
      * Конструктор ноды.
@@ -28,17 +29,28 @@ public class Node<T> {
     }
 
     /**
+     * Устанавливает следующий.
+     * @param next следующий.
+     */
+    public void setNext(Node<T> next) {
+
+        this.next = next;
+    }
+
+    /**
      * Проверяет зациклена коллекция или нет.
      * @param first - элемент коллекции.
      * @return true если коллекция зациклена.
      */
-    static public boolean hasCycle(Node first) {
+    public static boolean hasCycle(Node first) {
 
         Node x = first;
         Node x2 = x.next;
 
         while (x2 != null && x2.next != null) {
-            if (x == x2) return true;
+            if (x == x2) {
+                return true;
+            }
             x = x.next;
             x2 = x2.next.next;
         }

@@ -5,8 +5,17 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class NodeTest {
 
+    /**
+     * Проверяем ноду.
+     */
     @Test
     public void hasCycle() {
 
@@ -15,14 +24,17 @@ public class NodeTest {
         Node third = new Node(3);
         Node four = new Node(4);
 
-        first.next = two;
-        two.next = third;
-        third.next = four;
-        four.next = first;
+        first.setNext(two);
+        two.setNext(third);
+        third.setNext(four);
+        four.setNext(first);
 
         assertThat(Node.hasCycle(first), is(true));
     }
 
+    /**
+     * Проверяем ноду.
+     */
     @Test
     public void hasNotCycle() {
 
@@ -31,9 +43,9 @@ public class NodeTest {
         Node third = new Node(3);
         Node four = new Node(4);
 
-        first.next = two;
-        two.next = third;
-        third.next = four;
+        first.setNext(two);
+        two.setNext(third);
+        third.setNext(four);
 
         assertThat(Node.hasCycle(first), is(false));
     }

@@ -6,8 +6,18 @@ import java.util.ConcurrentModificationException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class ListTest {
 
+    /**
+     * Иницилизируем список.
+     * @param list список.
+     */
     private void initList(List<Integer> list) {
 
         list.add(2);
@@ -15,6 +25,10 @@ public class ListTest {
         list.add(7);
     }
 
+    /**
+     * Получаем список на массивах.
+     * @return список.
+     */
     private ArrayList getNewMyArrayList() {
 
         ArrayList<Integer> myArrayList = new ArrayList<Integer>();
@@ -22,6 +36,10 @@ public class ListTest {
         return myArrayList;
     }
 
+    /**
+     * Получаем связанный список.
+     * @return список.
+     */
     private LinkedList getNewMyLinkedList() {
 
         LinkedList<Integer> myLinkedList = new LinkedList<>();
@@ -29,6 +47,9 @@ public class ListTest {
         return myLinkedList;
     }
 
+    /**
+     * Проверяем список.
+     */
     @Test
     public void add() {
 
@@ -36,6 +57,9 @@ public class ListTest {
         assertThat(getNewMyLinkedList().toString(), is("2;1;7;"));
     }
 
+    /**
+     * Проверяем список.
+     */
     @Test
     public void get() {
 
@@ -43,6 +67,9 @@ public class ListTest {
         assertThat(getNewMyLinkedList().get(1), is(1));
     }
 
+    /**
+     * Проверяем список.
+     */
     @Test
     public void getLastIndex() {
 
@@ -50,6 +77,9 @@ public class ListTest {
         assertThat(getNewMyLinkedList().getLastIndex(), is(2));
     }
 
+    /**
+     * Проверяем список.
+     */
     @Test
     public void getModCount() {
 
@@ -65,8 +95,11 @@ public class ListTest {
         assertThat(myLinkedList.getLastIndex(), is(4));
     }
 
+    /**
+     * Проверяем список.
+     */
     @Test(expected = ConcurrentModificationException.class)
-    public void ConcurrentModificationException_arrayList(){
+    public void concurrentModificationExceptionarrayList() {
 
         ArrayList<Integer> myArrayList = getNewMyArrayList();
         for (Object number:myArrayList) {
@@ -74,8 +107,11 @@ public class ListTest {
         }
     }
 
+    /**
+     * Проверяем список.
+     */
     @Test(expected = ConcurrentModificationException.class)
-    public void ConcurrentModificationException_linkedList(){
+    public void concurrentModificationExceptionlinkedList() {
 
         LinkedList<Integer> myLinkedList = getNewMyLinkedList();
         for (Object number:myLinkedList) {

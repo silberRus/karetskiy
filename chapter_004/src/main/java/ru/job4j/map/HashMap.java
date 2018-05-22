@@ -7,16 +7,34 @@ import static java.lang.Math.abs;
  * @author karetskiy
  * @since 18.05.2018
  * @version 1
+ * @param <K> тип значения ключа.
+ * @param <V> тип значения значения.
  */
-public class HashMap<K,V> {
+public class HashMap<K, V> {
 
     /**
      * Класс ячейки для хранения ключ-значение.
+     * @param <K> тип значения ключа.
+     * @param <V> тип значения значения.
      */
-    static final class Node<K, V>{
-        K key;
-        V value;
-        public Node(K key, V value) {
+    static final class Node<K, V> {
+
+        /**
+         * ключ.
+         */
+        private K key;
+
+        /**
+         * Значение.
+         */
+        private V value;
+
+        /**
+         * Конструктор, сразу задаем ключ значение.
+         * @param key ключ.
+         * @param value значениe.
+         */
+        Node(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -71,6 +89,10 @@ public class HashMap<K,V> {
         return hashCode(key, values.length);
     }
 
+    /**
+     * Возвращает размер списка.
+     * @return размер списка.
+     */
     public int size() {
         return size;
     }

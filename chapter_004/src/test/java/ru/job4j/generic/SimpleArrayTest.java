@@ -6,12 +6,24 @@ import java.util.NoSuchElementException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class SimpleArrayTest {
 
-    private final String LS = System.lineSeparator();
+    /**
+     * Сепаратор для перевода строк.
+     */
+    private final String ls = System.lineSeparator();
 
+    /**
+     * Получаем список.
+     * @return список.
+     */
     private SimpleArray<Integer> newSimpleArray() {
 
         SimpleArray<Integer> sa = new SimpleArray<>();
@@ -23,48 +35,63 @@ public class SimpleArrayTest {
         return sa;
     }
 
+    /**
+     * Проверяем метод add.
+     */
     @Test
-    public void add_1_3_2() {
+    public void add132() {
 
         assertThat(newSimpleArray().toString(), is(String.format("%s%s%s%s%s%s%s%s",
-                            "SimpleArray:", LS,
-                                        "1", LS,
-                                        "3", LS,
-                                        "2", LS)));
+                            "SimpleArray:", ls,
+                                        "1", ls,
+                                        "3", ls,
+                                        "2", ls)));
     }
 
+    /**
+     * Проверяем метод delete.
+     */
     @Test
-    public void delete_ind1_result_1_2() {
+    public void deleteind1result12() {
 
         SimpleArray<Integer> sa = newSimpleArray();
         sa.delete(1);
 
         assertThat(sa.toString(), is(String.format("%s%s%s%s%s%s",
-                "SimpleArray:", LS,
-                "1", LS,
-                "2", LS)));
+                "SimpleArray:", ls,
+                "1", ls,
+                "2", ls)));
     }
 
+   /**
+     * Проверяем метод set.
+     */
     @Test
-    public void set_ind1_val4_result_1_4_2() {
+    public void setind1val4result142() {
 
         SimpleArray<Integer> sa = newSimpleArray();
         sa.set(1, 4);
 
         assertThat(sa.toString(), is(String.format("%s%s%s%s%s%s%s%s",
-                "SimpleArray:", LS,
-                "1", LS,
-                "4", LS,
-                "2", LS)));
+                "SimpleArray:", ls,
+                "1", ls,
+                "4", ls,
+                "2", ls)));
     }
 
+    /**
+     * Проверяем метод get.
+     */
     @Test
-    public void get_ind2_result_2() {
+    public void getind2result2() {
         assertThat(newSimpleArray().get(2), is(2));
     }
 
+    /**
+     * Проверяем исключение когда список закончился.
+     */
     @Test(expected = NoSuchElementException.class)
-    public void saOfNextMethodShouldThrowNoSuchElementException(){
+    public void saOfNextMethodShouldThrowNoSuchElementException() {
 
         IteratotorArray<Integer> it = new IteratotorArray<>(newSimpleArray());
 

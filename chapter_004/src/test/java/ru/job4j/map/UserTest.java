@@ -6,10 +6,17 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class UserTest {
 
+    /**
+     * Проверяем пользователя.
+     */
     @Test
     public void dontCoverEqualsAndHexCode() {
 

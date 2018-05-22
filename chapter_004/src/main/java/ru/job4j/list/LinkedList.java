@@ -5,38 +5,40 @@ package ru.job4j.list;
  * @author karetskiy
  * @since 18.04.2018
  * @version 2
+ * @param <E> Тип списка.
  */
 public class LinkedList<E> extends List<E> {
 
     /**
      * первый элемент ноды.
      */
-    Node<E> first;
+    private Node<E> first;
 
     /**
      * последний элемент ноды.
      */
-    Node<E> last;
+    private Node<E> last;
 
     /**
      * Class внутренней ноды для связанных объектов.
+     * @param <E> типс списка нода.
      * */
-    private static class Node<E>{
+    private static class Node<E> {
 
         /**
          * Хранимый объект коллекции.
          */
-        E element;
+        private E element;
 
         /**
          * Следующий элемент коллекции.
          */
-        Node<E> next;
+        private Node<E> next;
 
         /**
          * Предыдущий элемент коллекции.
          */
-        Node<E> prev;
+        private Node<E> prev;
 
         /**
          * Конструктуор ноды.
@@ -83,13 +85,14 @@ public class LinkedList<E> extends List<E> {
     /**
      * Добавляет элемент в коллекцию.
      * @param item - добавляемый элемент коллекции.
+     * @return true если элемент был добавлен в список.
      *
      */
     public boolean add(E item) {
 
-        Node<E> newElem = new Node<E>(last, item,null);
+        Node<E> newElem = new Node<E>(last, item, null);
 
-        if (size == 0) {
+        if (getSize() == 0) {
             first = newElem;
         } else {
             last.setNext(newElem);
@@ -108,7 +111,7 @@ public class LinkedList<E> extends List<E> {
     public E get(int index) {
 
         Node<E> current = first;
-        for(int ind = 0; ind < index; ind++) {
+        for (int ind = 0; ind < index; ind++) {
             current = current.getNext();
         }
         return current.getElement();

@@ -5,6 +5,7 @@ package ru.job4j.list;
  * @author karetskiy
  * @since 18.04.2018
  * @version 1
+ * @param <T> тип очереди.
  */
 public class SimpleStack<T> {
 
@@ -28,7 +29,7 @@ public class SimpleStack<T> {
      * Помещает элемент в стек.
      * @param value - помещаемое значение.
      */
-    public void push(T value){
+    public void push(T value) {
         store.add(value);
     }
 

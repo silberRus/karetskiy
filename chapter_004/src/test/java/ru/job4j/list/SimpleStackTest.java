@@ -5,9 +5,19 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class SimpleStackTest {
 
-    private SimpleStack<Integer> getNewSimpleStack(){
+    /**
+     * Получаем буфер.
+     * @return буфер.
+     */
+    private SimpleStack<Integer> getNewSimpleStack() {
 
         SimpleStack<Integer> simpletack = new SimpleStack<>();
         simpletack.push(4);
@@ -18,6 +28,9 @@ public class SimpleStackTest {
         return simpletack;
     }
 
+    /**
+     * Проверяем буфер.
+     */
     @Test
     public void poll() {
 
@@ -29,6 +42,9 @@ public class SimpleStackTest {
         assertThat(simpleStack.poll(), is(4));
     }
 
+    /**
+     * Проверяем буфер.
+     */
     @Test
     public void push() {
 

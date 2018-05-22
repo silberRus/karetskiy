@@ -5,26 +5,46 @@ package ru.job4j.list;
  * @author karetskiy
  * @since 18.04.2018
  * @version 1
+ * @param <E> тип списка.
  */
-public abstract class List<E> implements Iterable<E>{
+public abstract class List<E> implements Iterable<E> {
 
     /**
      * Размер коллекции.
      */
-    int size = 0;
+    private int size = 0;
 
     /**
      * Текущее состояние коллекции.
      */
-    int modCount = 0;
+    private int modCount = 0;
+
+    /**
+     * Получает размер коллекции.
+     * @return Размер коллекции.
+     *
+     */
+    public int getSize() {
+
+        return size;
+    }
+
+    /**
+     * Уменьшает размер на 1.
+     */
+    public void subOneSize() {
+
+        size--;
+    }
 
     /**
      * Добавляет элемент в коллекцию.
      * @param value - добовляемый элемент.
+     * @return true если элемент был добавлен в список.
      *
      */
-    public boolean add(E value)
-    {
+    public boolean add(E value) {
+
         size++;
         modCount++;
         return true;
@@ -46,7 +66,7 @@ public abstract class List<E> implements Iterable<E>{
 
         StringBuilder sb = new StringBuilder();
 
-        for(E item: this) {
+        for (E item: this) {
             if (item != null) {
                 sb.append(item.toString());
                 sb.append(";");

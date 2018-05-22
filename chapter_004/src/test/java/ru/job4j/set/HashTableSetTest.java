@@ -6,8 +6,19 @@ import java.util.Arrays;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class HashTableSetTest {
 
+    /**
+     * Возвращаем сортированную стрку.
+     * @param string исходная строка.
+     * @return сортированную строку.
+     */
     private String sortedText(String string) {
 
         char[] chasrs = string.toCharArray();
@@ -15,6 +26,10 @@ public class HashTableSetTest {
         return Arrays.toString(chasrs);
     }
 
+    /**
+     * Возвращаем хешампу.
+     * @return хешампу.
+     */
     private HashTableSet<String> hashSet() {
 
         HashTableSet<String> hashSet = new HashTableSet<>();
@@ -29,12 +44,18 @@ public class HashTableSetTest {
         return hashSet;
     }
 
+    /**
+     * Проверяем хештаблицу.
+     */
     @Test
     public void add() {
 
         assertThat(sortedText(hashSet().toString()), is(sortedText("first;second;five;seven;ten;")));
     }
 
+    /**
+     * Проверяем хештаблицу.
+     */
     @Test
     public void contains() {
 
@@ -42,6 +63,9 @@ public class HashTableSetTest {
         assertThat(hashSet.contains("second"), is(true));
     }
 
+    /**
+     * Проверяем хештаблицу.
+     */
     @Test
     public void remove() {
 

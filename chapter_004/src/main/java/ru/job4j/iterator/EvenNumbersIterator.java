@@ -62,7 +62,9 @@ public class EvenNumbersIterator implements Iterator<Integer> {
     public Integer next() {
 
         index = nextEvenIndex();
-        if (index == -1) throw new java.util.NoSuchElementException();
+        if (index == -1) {
+            throw new java.util.NoSuchElementException();
+        }
         return values[index];
     }
 }

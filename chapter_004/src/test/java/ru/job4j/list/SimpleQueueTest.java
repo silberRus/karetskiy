@@ -5,9 +5,19 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class SimpleQueueTest {
 
-    private SimpleQueue getNewQuene(){
+    /**
+     * Получаем очередь.
+     * @return очередь.
+     */
+    private SimpleQueue getNewQuene() {
 
         SimpleQueue<Integer> simpleQueue = new SimpleQueue<>();
         simpleQueue.push(4);
@@ -18,6 +28,9 @@ public class SimpleQueueTest {
         return simpleQueue;
     }
 
+    /**
+     * Проверяем очередь.
+     */
     @Test
     public void poll() {
 
@@ -29,6 +42,9 @@ public class SimpleQueueTest {
         assertThat(simpleQueue.poll(), is(2));
     }
 
+    /**
+     * Проверяем очередь.
+     */
     @Test
     public void push() {
 

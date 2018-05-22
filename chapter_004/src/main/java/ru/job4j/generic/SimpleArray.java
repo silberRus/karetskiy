@@ -7,6 +7,7 @@ import java.util.Arrays;
  * @author karetskiy
  * @since 04.04.2018
  * @version 2
+ * @param <T> тип списка.
  */
 public class SimpleArray<T> {
 
@@ -78,7 +79,7 @@ public class SimpleArray<T> {
 
     /**
      * Возвращает элемент по указангому индексу в коллекции.
-     * @param index - индекс возвращаемого элемента в коллекции.
+     * @param ind - индекс возвращаемого элемента в коллекции.
      * @return объект из коллекции.
      */
     public T get(int ind) {

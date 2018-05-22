@@ -1,31 +1,39 @@
 package ru.job4j.map;
 
 import org.junit.Test;
-
-import java.util.Calendar;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 22.05.2018
+ * @version 2
+ */
 public class HashMapTest {
 
+    /**
+     * Проверяем мап.
+     */
     @Test
     public void insert() {
 
         int added = 0;
         HashMap<Integer, String> hashMap = new HashMap<>();
-        added+=hashMap.insert(1, "один") ? 1 : 0;
-        added+=hashMap.insert(2, "два") ? 1 : 0;
-        added+=hashMap.insert(3, "три") ? 1 : 0;
-        added+=hashMap.insert(4, "четыре") ? 1 : 0;
-        added+=hashMap.insert(5, "пять") ? 1 : 0;
-        added+=hashMap.insert(6, "шесть") ? 1 : 0;
-        added+=hashMap.insert(7, "семь") ? 1 : 0;
+        added += hashMap.insert(1, "один") ? 1 : 0;
+        added += hashMap.insert(2, "два") ? 1 : 0;
+        added += hashMap.insert(3, "три") ? 1 : 0;
+        added += hashMap.insert(4, "четыре") ? 1 : 0;
+        added += hashMap.insert(5, "пять") ? 1 : 0;
+        added += hashMap.insert(6, "шесть") ? 1 : 0;
+        added += hashMap.insert(7, "семь") ? 1 : 0;
 
         assertThat(added, is(hashMap.size()));
     }
 
+    /**
+     * Проверяем мап.
+     */
     @Test
     public void get() {
 
@@ -37,6 +45,9 @@ public class HashMapTest {
 
     }
 
+    /**
+     * Проверяем мап.
+     */
     @Test
     public void delete() {
 

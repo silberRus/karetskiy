@@ -7,6 +7,7 @@ import ru.job4j.list.LinkedList;
  * @author karetskiy
  * @since 21.04.2018
  * @version 1
+ * @param <T> тип сета.
  */
 public class LinkedSet<T> extends LinkedList<T> {
 
@@ -25,7 +26,9 @@ public class LinkedSet<T> extends LinkedList<T> {
                 break;
             }
         }
-        if (!find) super.add(item);
+        if (!find) {
+            super.add(item);
+        }
         return !find;
     }
 }

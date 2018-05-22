@@ -18,7 +18,7 @@ public class MatrixIterator implements Iterator<Integer> {
     /**
      * Крусоры в массивах, первый элемент на масиве, второй внутри массива.
      */
-    private int[] cursor = {0,-1};
+    private int[] cursor = {0, -1};
 
     /**
      * Конструктор.
@@ -61,7 +61,9 @@ public class MatrixIterator implements Iterator<Integer> {
     public Integer next() {
 
         cursor = nextInd();
-        if (cursor == null) throw new java.util.NoSuchElementException();
+        if (cursor == null) {
+            throw new java.util.NoSuchElementException();
+        }
         return values[cursor[0]][cursor[1]];
     }
 }

@@ -32,6 +32,7 @@ public class PrimeIterator implements Iterator<Integer> {
 
     /**
      * Проверяет число простое или нет.
+     * @param value проверяемое число.
      * @return true если число простое.
      *
      */
@@ -40,7 +41,7 @@ public class PrimeIterator implements Iterator<Integer> {
         boolean isPrime = value > 1;
 
         for (int num = 2; num < value - 1; num++) {
-            if (value%num == 0) {
+            if (value % num == 0) {
                 isPrime = false;
                 break;
             }
@@ -85,7 +86,9 @@ public class PrimeIterator implements Iterator<Integer> {
     public Integer next() {
 
         index = nextPrimeIndex();
-        if (index == -1) throw new java.util.NoSuchElementException();
+        if (index == -1) {
+            throw new java.util.NoSuchElementException();
+        }
         return values[index];
     }
 }

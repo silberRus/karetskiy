@@ -7,6 +7,7 @@ import ru.job4j.list.ArrayList;
  * @author karetskiy
  * @since 16.05.2018
  * @version 3
+ * @param <T> тип сета.
  */
 public class ArraySet<T> extends ArrayList<T> {
 
@@ -19,7 +20,9 @@ public class ArraySet<T> extends ArrayList<T> {
     public boolean add(T t) {
 
         boolean notFind = index(t) < 0;
-        if (notFind) super.add(t);
+        if (notFind) {
+            super.add(t);
+        }
         return notFind;
     }
 
@@ -31,7 +34,9 @@ public class ArraySet<T> extends ArrayList<T> {
     public boolean remove(T t) {
 
         int ind = index(t);
-        if (ind >= 0) remove(ind);
+        if (ind >= 0) {
+            remove(ind);
+        }
         return ind >= 0;
     }
 
@@ -42,7 +47,7 @@ public class ArraySet<T> extends ArrayList<T> {
      */
     public int index(T t) {
 
-        for(int ind = 0; ind <= getLastIndex(); ind++) {
+        for (int ind = 0; ind <= getLastIndex(); ind++) {
             if (get(ind).equals(t)) {
                 return ind;
             }
