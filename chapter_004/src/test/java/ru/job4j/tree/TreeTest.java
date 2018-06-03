@@ -1,6 +1,7 @@
 package ru.job4j.tree;
 
 import org.junit.Test;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -39,5 +40,19 @@ public class TreeTest {
                 tree.findBy(7).isPresent(),
                 is(false)
         );
+    }
+
+    @Test
+    public void iteratorTest() {
+
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(5, 6);
+        tree.add(1, 7);
+
+        assertThat(tree.toString(),is("1234756"));
     }
 }

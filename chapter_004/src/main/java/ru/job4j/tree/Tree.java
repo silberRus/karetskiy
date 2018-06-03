@@ -1,9 +1,6 @@
 package ru.job4j.tree;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Class простого дерева.
@@ -74,6 +71,19 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     @Override
     public Iterator<E> iterator() {
-        return node.iterator();
+
+        return new IteratorTree<>(node);
+    }
+
+    /**
+     * Возвращает представление дерева
+     * @return представление дерева.
+     */
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+        forEach(nd->sb.append(nd.toString()));
+        return sb.toString();
     }
 }

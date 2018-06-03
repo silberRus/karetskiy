@@ -62,5 +62,13 @@ public class Node<E extends Comparable<E>> {
      */
     public Iterator iterator() {
             return children.iterator();
-        }
+    }
+
+    /**
+     * Возвращает значение ноды.
+     * @return значение ноды.
+     */
+    public E getValue() {
+        return value;
+    }
 }
