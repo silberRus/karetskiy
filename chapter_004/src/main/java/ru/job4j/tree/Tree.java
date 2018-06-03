@@ -1,6 +1,9 @@
 package ru.job4j.tree;
 
-import java.util.*;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Iterator;
 
 /**
  * Class простого дерева.
@@ -35,7 +38,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
         Optional<Node<E>> rel = findBy(parent);
         boolean isPresent = rel.isPresent();
-        if (isPresent) {
+        if (isPresent && !findBy(child).isPresent()) {
             rel.get().add(new Node(child));
         }
         return isPresent;
@@ -76,7 +79,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
-     * Возвращает представление дерева
+     * Возвращает представление дерева.
      * @return представление дерева.
      */
     @Override

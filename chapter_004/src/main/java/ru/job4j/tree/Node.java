@@ -61,7 +61,7 @@ public class Node<E extends Comparable<E>> {
      * @return итератор ветки.
      */
     public Iterator iterator() {
-            return children.iterator();
+        return children.iterator();
     }
 
     /**

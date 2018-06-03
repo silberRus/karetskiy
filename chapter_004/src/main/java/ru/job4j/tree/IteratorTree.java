@@ -11,7 +11,7 @@ import java.util.Iterator;
  * @version 1
  * @param <T> тип значений дерева.
  */
-public class IteratorTree<T extends Comparable<T>> implements Iterator<T>{
+public class IteratorTree<T extends Comparable<T>> implements Iterator<T> {
 
     /**
      * Текущая нода
@@ -20,6 +20,7 @@ public class IteratorTree<T extends Comparable<T>> implements Iterator<T>{
 
     /**
      * Конструктор, при создании организуем очередь.
+     * @param first нода от которой будем считать очередь.
      */
     public IteratorTree(Node<T> first) {
 

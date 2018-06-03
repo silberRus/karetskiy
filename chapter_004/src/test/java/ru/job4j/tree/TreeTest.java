@@ -42,6 +42,9 @@ public class TreeTest {
         );
     }
 
+    /**
+     * Проверим итереатор.
+     */
     @Test
     public void iteratorTest() {
 
@@ -53,6 +56,21 @@ public class TreeTest {
         tree.add(5, 6);
         tree.add(1, 7);
 
-        assertThat(tree.toString(),is("1234756"));
+        assertThat(tree.toString(), is("1234756"));
+    }
+
+    /**
+     * Проверим что второй такойже child добавить нельзя.
+     */
+    @Test
+    public void childIsUnikum() {
+
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(2, 6);
+        tree.add(1, 2);
+
+        assertThat(tree.toString(), is("1236"));
     }
 }
