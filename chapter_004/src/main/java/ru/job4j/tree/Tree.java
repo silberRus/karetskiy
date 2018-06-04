@@ -1,14 +1,14 @@
 package ru.job4j.tree;
 
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.Iterator;
 
 /**
  * Class простого дерева.
  * @author karetskiy
- * @since 21.05.2018
+ * @since 05.06.2018
  * @version 1
  * @param <E> тип значений дерева.
  */
@@ -66,6 +66,25 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             }
         }
         return rsl;
+    }
+
+    /**
+     * Проверяет дерево бинарное или нет.
+     * @return true если дерево бинарное.
+     */
+    public boolean isBinary() {
+
+        IteratorTree<E> iterator = (IteratorTree<E>) iterator();
+        boolean isBinary = true;
+
+        while (iterator.hasNext()) {
+            iterator.next();
+            if (!iterator.isBinary()) {
+                isBinary = false;
+                break;
+            }
+        }
+        return isBinary;
     }
 
     /**

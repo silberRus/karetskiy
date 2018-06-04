@@ -73,4 +73,35 @@ public class TreeTest {
 
         assertThat(tree.toString(), is("1236"));
     }
+
+    /**
+     * Проверим дерево бинарное.
+     */
+    @Test
+    public void treeIsBinary() {
+
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(3, 5);
+        tree.add(5, 6);
+
+        assertThat(tree.isBinary(), is(true));
+    }
+
+    /**
+     * Проверим дерево не бинарное.
+     */
+    @Test
+    public void treeIsNotBinary() {
+
+        Tree<Integer> tree = new Tree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(3, 5);
+        tree.add(5, 6);
+        tree.add(1, 7);
+
+        assertThat(tree.isBinary(), is(false));
+    }
 }

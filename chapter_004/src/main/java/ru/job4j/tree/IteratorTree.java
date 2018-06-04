@@ -7,8 +7,8 @@ import java.util.Iterator;
 /**
  * Class итератора дерева.
  * @author karetskiy
- * @since 03.06.2018
- * @version 1
+ * @since 05.06.2018
+ * @version 2
  * @param <T> тип значений дерева.
  */
 public class IteratorTree<T extends Comparable<T>> implements Iterator<T> {
@@ -26,6 +26,14 @@ public class IteratorTree<T extends Comparable<T>> implements Iterator<T> {
 
         queue = new ArrayDeque<>();
         queue.addLast(first);
+    }
+
+    /**
+     * Проверяет итератор бинарный или нет.
+     * @return true если бинарный.
+     */
+    public boolean isBinary() {
+        return queue.size() <= 2;
     }
 
     /**
