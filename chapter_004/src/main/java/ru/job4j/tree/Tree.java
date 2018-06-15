@@ -8,8 +8,8 @@ import java.util.LinkedList;
 /**
  * Class простого дерева.
  * @author karetskiy
- * @since 05.06.2018
- * @version 1
+ * @since 16.06.2018
+ * @version 2
  * @param <E> тип значений дерева.
  */
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
@@ -78,8 +78,8 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         boolean isBinary = true;
 
         while (iterator.hasNext()) {
-            iterator.next();
-            if (!iterator.isBinary()) {
+            Node<E> de = iterator.nextNode();
+            if (de.leaves().size() > 2) {
                 isBinary = false;
                 break;
             }
