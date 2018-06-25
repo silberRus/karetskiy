@@ -3,26 +3,27 @@ package ru.job4j.tree;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
- * Class итератора дерева.
+ * Class итератора бинарного дерева.
  * @author karetskiy
- * @since 16.06.2018
- * @version 3
+ * @since 25.06.2018
+ * @version 1
  * @param <T> тип значений дерева.
  */
-public class IteratorTree<T extends Comparable<T>> implements Iterator<T> {
+public class IteratorBST<T extends Comparable<T>> implements Iterator<T> {
 
     /**
      * Текущая нода.
      */
-    private Deque<Node<T>> queue;
+    private Deque<NodeBST<T>> queue;
 
     /**
      * Конструктор, при создании организуем очередь.
      * @param first нода от которой будем считать очередь.
      */
-    public IteratorTree(Node<T> first) {
+    public IteratorBST(NodeBST<T> first) {
 
         queue = new ArrayDeque<>();
         queue.addLast(first);
@@ -38,25 +39,18 @@ public class IteratorTree<T extends Comparable<T>> implements Iterator<T> {
     }
 
     /**
-     * Возвращает следующую ноду.
-     * @return следующую ноду.
-     */
-    public Node<T> nextNode() {
-
-        Node<T> node = queue.removeFirst();
-        for (Node<T> child: node.leaves()) {
-            queue.addLast(child);
-        }
-        return node;
-    }
-
-    /**
      * Возвращает следующее значение.
      * @return T следующее значение.
      */
     @Override
-    public T next() {
+    public T next() throws NoSuchElementException {
 
-        return nextNode().getValue();
+        NodeBST<T> node = queue.removeFirst();
+        for (NodeBST<T> child: node.child()) {
+            if (child != null) {
+                queue.addLast(child);
+            }
+        }
+        return node.getValue();
     }
 }

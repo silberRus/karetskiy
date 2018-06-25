@@ -105,8 +105,11 @@ public class TreeTest {
         assertThat(tree.isBinary(), is(false));
     }
 
+    /**
+     * Проверим дерево бинарное.
+     */
     @Test
-    public void shouldReturnTrue () {
+    public void shouldReturnTrue() {
 
         Tree<Integer> tree = new Tree<>(50);
         tree.add(50, 70);
