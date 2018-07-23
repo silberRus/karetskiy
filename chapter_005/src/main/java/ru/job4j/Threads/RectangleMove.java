@@ -59,26 +59,21 @@ public class RectangleMove implements Runnable {
      * Бесконечный цикл треда.
      */
     @Override
-    public void run() {
-
+    public void run()
+    {
         double vectorX = 1;
         double vectorY = 1;
-
         while (true) {
-
             double x = this.rect.getX();
             double y = this.rect.getY();
-
             vectorX = vectorX * reverse(x, limitX);
             vectorY = vectorY * reverse(y, limitY);
-
             this.rect.setX(x + vectorX * speed);
             this.rect.setY(y + vectorY * speed);
-
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                return;
             }
         }
     }
