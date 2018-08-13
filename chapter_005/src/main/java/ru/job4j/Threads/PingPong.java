@@ -25,7 +25,6 @@ public class PingPong extends Application {
      */
     @Override
     public void start(Stage stage) throws InterruptedException {
-
         int limitX = 300;
         int limitY = 300;
         Group group = new Group();

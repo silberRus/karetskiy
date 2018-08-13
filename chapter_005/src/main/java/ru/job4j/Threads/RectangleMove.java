@@ -50,7 +50,6 @@ public class RectangleMove implements Runnable {
      * @return текущий вектор направления.
      */
     private int reverse(double coord, int maxSize) {
-
         return coord < 0 || coord > maxSize ? -1 : 1;
     }
 
