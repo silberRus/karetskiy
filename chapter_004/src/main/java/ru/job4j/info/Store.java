@@ -1,14 +1,15 @@
 package ru.job4j.info;
 
-import java.util.HashSet;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Class Хранилища коллекций.
  *
  * @author karetskiy
- * @version 1
- * @since 18.07.2018
+ * @version 2
+ * @since 11.09.2018
  */
 class Store {
 
@@ -50,6 +51,15 @@ class Store {
     }
 
     /**
+     * Получаем следущего в коллекции пользователя.
+     * @param it итератор коллекции пользователей.
+     * @return следующий пользователь коллекции если возможно.
+     */
+    private User nextUsr(Iterator<User> it) {
+        return it.hasNext() ? it.next() : null;
+    }
+
+    /**
      * Проверяем статистику по изменениям коллекции
      * @param previous - список до изменений.
      * @param current - текущий список.
@@ -58,32 +68,33 @@ class Store {
     public Info diff(List<User> previous, List<User> current) {
 
         Info info = new Info();
-        HashSet<User> isDel = new HashSet<>();
 
-        current.forEach(user -> {
+        Comparator<User> comparator = Comparator.comparingInt(o -> o.id);
+        previous.sort(comparator);
+        current.sort(comparator);
 
-            boolean isNew = true;
+        Iterator<User> it1 = previous.iterator();
+        Iterator<User> it2 = current.iterator();
 
-            for (User olden: previous) {
+        User us1 = it1.next();
+        User us2 = it2.next();
 
-                if (user.equals(olden)) {
+        while (us1 != null && us2 != null) {
 
-                    isNew = false;
-                    if (!user.name.equals(olden.name)) {
-                        info.change();
-                    }
-                    break;
-
-                } else if (!isDel.contains(olden) && !current.contains(olden)) {
-
-                    isDel.add(olden);
-                    info.delete();
-                }
-            }
-            if (isNew) {
+            if (us2 == null || us1.id < us2.id) {
+                info.delete();
+                us1 = nextUsr(it1);
+            } else if(us1 == null || us1.id > us2.id) {
                 info.add();
+                us2 = nextUsr(it2);
+            } else {
+                if(us1.name != us2.name) {
+                    info.change();
+                }
+                us1 = nextUsr(it1);
+                us2 = nextUsr(it2);
             }
-        });
+        }
         return info;
     }
 }
