@@ -3,15 +3,15 @@ package ru.job4j.Users;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Class хранилище пользователей.
  *
  * @author karetskiy
  * @version 1
- * @since 29.08.2018
+ * @since 15.09.2018
  */
 @ThreadSafe
 public class UserStore {
@@ -20,42 +20,30 @@ public class UserStore {
      * Коллекция пользователей.
      */
     @GuardedBy("this")
-    private Map<Integer, User> users = new HashMap();
+    private ConcurrentMap<Integer, User> users = new ConcurrentHashMap<>();
 
     /**
      * Добавляет пользователя а коллекцию.
      * @param user добавляеммый пользоваетель.
-     * @return true если пользователь был добавлен в коллекцию.
      */
-    public boolean add(User user) {
-
-        int id = user.getId();
-        boolean isPresent = users.containsKey(id);
-
-        if (!isPresent) {
-            users.put(id, user);
-        }
-        return !isPresent;
+    public void add(User user) {
+        users.putIfAbsent(user.getId(), user);
     }
 
     /**
      * Ищет пользователя с таким же id как у передоваемого пользователя
      * и заменяет пользователя, новый пользователем.
      * @param user ползователь на которого заменяем.
-     * @return true если пользователь был заменен.
      */
-    public boolean update(User user) {
-        int id = user.getId();
-        return users.replace(id, users.get(id), user);
+    public void update(User user) {
+        users.putIfAbsent(user.getId(), user);
     }
 
     /**
-     *
      * @param user удаляем пользователя из хранилища.
-     * @return true если пользователь был удвлен.
      */
-    public boolean delete(User user) {
-        return users.remove(user.getId(), user);
+    public void delete(User user) {
+        users.remove(user.getId());
     }
 
     /**
@@ -64,8 +52,16 @@ public class UserStore {
      * @param id2 идентификтаор пользователя к которому переводят деньги.
      * @param amount сумма переводимых денег.
      */
-    public synchronized void transfer(int id1, int id2, int amount) {
-        users.get(id1).changeAmount(-amount);
-        users.get(id2).changeAmount(amount);
+    public void transfer(int id1, int id2, int amount) {
+
+        User us1 = users.get(id1);
+        User us2 = users.get(id2);
+
+        synchronized (us1) {
+            synchronized (us2) {
+                us1.changeAmount(-amount);
+                us2.changeAmount(amount);
+            }
+        }
     }
 }
