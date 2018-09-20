@@ -1,5 +1,8 @@
 package ru.job4j.Users;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * Class хранилище даных пользователя.
  *
@@ -7,16 +10,18 @@ package ru.job4j.Users;
  * @version 1
  * @since 29.08.2018
  */
+@ThreadSafe
 public class User {
 
     /**
      * Идентификатор пользователя.
      */
-    private int id;
+    private final int id;
 
     /**
      * Сумма денег пользователя.
      */
+    @GuardedBy("this")
     private int amount;
 
     /**
@@ -31,7 +36,7 @@ public class User {
 
     /**
      * Получает идентификатор пользователя.
-     * @return
+     * @return идентификатор пользователя.
      */
     public int getId() {
         return id;
@@ -41,13 +46,13 @@ public class User {
      * Изменяет сумму денег пользователя.
      * @param dif сумма на которую нужно изинить счет пользователя.
      */
-    public void changeAmount(int dif) {
+    public synchronized void changeAmount(int dif) {
         this.amount += dif;
     }
 
     /**
      * Вычисление хеша пользователя.
-     * @return
+     * @return вычисленный хеш пользователя.
      */
     @Override
     public int hashCode() {
@@ -56,10 +61,10 @@ public class User {
 
     /**
      * Представление пользователя.
-     * @return
+     * @return представление пользователя.
      */
     @Override
-    public String toString() {
+    public synchronized String toString() {
         return "User{" +
                 "id=" + id +
                 ", amount=" + amount +

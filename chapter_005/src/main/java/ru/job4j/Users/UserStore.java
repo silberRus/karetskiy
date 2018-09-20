@@ -11,23 +11,30 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @author karetskiy
  * @version 1
- * @since 15.09.2018
+ * @since 20.09.2018
  */
 @ThreadSafe
 public class UserStore {
 
     /**
+     * Монитор блока.
+     */
+    private final Object lock = new Object();
+
+    /**
      * Коллекция пользователей.
      */
-    @GuardedBy("this")
-    private ConcurrentMap<Integer, User> users = new ConcurrentHashMap<>();
+    @GuardedBy("lock")
+    private final ConcurrentMap<Integer, User> users = new ConcurrentHashMap<>();
 
     /**
      * Добавляет пользователя а коллекцию.
      * @param user добавляеммый пользоваетель.
      */
     public void add(User user) {
-        users.putIfAbsent(user.getId(), user);
+        synchronized (lock) {
+            users.putIfAbsent(user.getId(), user);
+        }
     }
 
     /**
@@ -36,14 +43,18 @@ public class UserStore {
      * @param user ползователь на которого заменяем.
      */
     public void update(User user) {
-        users.putIfAbsent(user.getId(), user);
+        synchronized (lock) {
+            users.putIfAbsent(user.getId(), user);
+        }
     }
 
     /**
      * @param user удаляем пользователя из хранилища.
      */
     public void delete(User user) {
-        users.remove(user.getId());
+        synchronized (lock) {
+            users.remove(user.getId());
+        }
     }
 
     /**
@@ -54,14 +65,13 @@ public class UserStore {
      */
     public void transfer(int id1, int id2, int amount) {
 
-        User us1 = users.get(id1);
-        User us2 = users.get(id2);
+        synchronized (lock) {
 
-        synchronized (us1) {
-            synchronized (us2) {
-                us1.changeAmount(-amount);
-                us2.changeAmount(amount);
-            }
+            User us1 = users.get(id1);
+            User us2 = users.get(id2);
+
+            us1.changeAmount(-amount);
+            us2.changeAmount(amount);
         }
     }
 }
