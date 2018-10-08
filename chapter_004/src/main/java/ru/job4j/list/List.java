@@ -55,7 +55,7 @@ public abstract class List<E> implements Iterable<E> {
      * @param index - индекс элемента который нужно получить.
      * @return элемент коллекции.
      */
-    abstract E get(int index);
+    public abstract E get(int index);
 
     /**
      * Возвращает представление коллеции в виде строки.
