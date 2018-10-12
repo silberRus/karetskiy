@@ -43,8 +43,7 @@ public class ListTreadsSafeTest {
          * Запускает поток.
          */
         @Override
-        public void run()
-        {
+        public void run() {
             int i;
             for (i = 0; i < 100; i++) {
                 listTreadsSafe.add("obj" + i);

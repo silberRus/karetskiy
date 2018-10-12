@@ -29,8 +29,7 @@ public class ListTreadsSafe<T> extends List<T> {
      * @return true если элемент был добавлен в коллекцию.
      */
     @Override
-    public synchronized boolean add(T value)
-    {
+    public synchronized boolean add(T value) {
         return this.array.add(value);
     }
 
@@ -38,8 +37,7 @@ public class ListTreadsSafe<T> extends List<T> {
      * Удаляет элемент из коллекци.
      * @param ind - индекс удаляемого элемента.
      */
-    public synchronized void remove(int ind)
-    {
+    public synchronized void remove(int ind) {
         this.array.remove(ind);
     }
 
@@ -71,9 +69,7 @@ public class ListTreadsSafe<T> extends List<T> {
     private ArrayList<T> copy(ArrayList<T> copyList) {
 
         ArrayList<T> arrayList = new ArrayList<T>();
-        synchronized (this) {
-            copyList.forEach(arrayList::add);
-        }
+        copyList.forEach(arrayList::add);
         return arrayList;
     }
 }
