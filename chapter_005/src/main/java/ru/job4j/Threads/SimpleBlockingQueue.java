@@ -19,22 +19,19 @@ public class SimpleBlockingQueue<T> {
     /**
      * Максимальный размер очереди.
      */
+    @GuardedBy("this")
     private int sizeMax;
-
-    /**
-     * Монитор блокировки.
-     */
-    private final Object lock = new Object();
 
     /**
      * Переменная для определения заблокирована очередь или нет.
      */
+    @GuardedBy("this")
     private boolean isBlocked = false;
 
     /**
      * Хранилище очереди.
      */
-    @GuardedBy("lock")
+    @GuardedBy("this")
     private final Queue<T> queue = new LinkedList<>();
 
     /**
@@ -50,7 +47,7 @@ public class SimpleBlockingQueue<T> {
      * @return Текущщий размер очереди.
      */
     public int size() {
-        synchronized (this.lock) {
+        synchronized (this) {
             return this.queue.size();
         }
     }
@@ -60,10 +57,8 @@ public class SimpleBlockingQueue<T> {
      */
     private void activationOther() {
 
-        synchronized (this.lock) {
-            this.isBlocked = false;
-            this.lock.notifyAll();
-        }
+        this.isBlocked = false;
+        this.notifyAll();
     }
 
     /**
@@ -72,9 +67,9 @@ public class SimpleBlockingQueue<T> {
      */
     public void offer(T value) throws InterruptedException {
 
-        synchronized (this.lock) {
+        synchronized (this) {
             while (this.isBlocked) {
-                lock.wait();
+                this.wait();
             }
             if (this.queue.size() <= this.sizeMax) {
                 this.isBlocked = true;
@@ -90,9 +85,9 @@ public class SimpleBlockingQueue<T> {
      */
     public T poll() throws InterruptedException {
 
-        synchronized (this.lock) {
+        synchronized (this) {
             while (this.isBlocked || this.queue.size() == 0) {
-                lock.wait();
+                this.wait();
             }
             this.isBlocked = true;
             T val = queue.poll();
