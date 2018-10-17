@@ -34,12 +34,26 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private final Queue<T> queue = new LinkedList<>();
 
+    @GuardedBy("this")
+    private boolean isFinish = false;
+
     /**
      * Конструктор, при иниилизации устанавливаем максимальный размер очереди.
      * @param sizeMax максимальный размер очереди.
      */
     public SimpleBlockingQueue(int sizeMax) {
         this.sizeMax = sizeMax;
+    }
+
+    public synchronized boolean isFinish() {
+        return isFinish;
+    }
+
+    public void finish() {
+        synchronized(this) {
+            isFinish = true;
+        }
+        Thread.yield();
     }
 
     /**
@@ -69,9 +83,11 @@ public class SimpleBlockingQueue<T> {
 
         synchronized (this) {
             while (this.isBlocked) {
+                System.out.println("wait offer");
                 this.wait();
             }
             if (this.queue.size() <= this.sizeMax) {
+                System.out.println("offer is");
                 this.isBlocked = true;
                 this.queue.offer(value);
             }
@@ -87,6 +103,7 @@ public class SimpleBlockingQueue<T> {
 
         synchronized (this) {
             while (this.isBlocked || this.queue.size() == 0) {
+                System.out.println("wait poll");
                 this.wait();
             }
             this.isBlocked = true;
