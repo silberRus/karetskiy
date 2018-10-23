@@ -8,7 +8,6 @@ import java.util.*;
  * @author karetskiy
  * @version 1
  * @since 22.07.2018
- * @param <T> тип итератора.
  */
 public class WordIndex {
 

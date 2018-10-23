@@ -8,8 +8,8 @@ import static org.junit.Assert.*;
 /**
  * Class теста потоков на не потокобезопасной коллекции.
  * @author karetskiy
- * @since 12.10.2018
- * @version 1
+ * @since 24.10.2018
+ * @version 2
  */
 public class SimpleBlockingQueueTest {
 
@@ -23,6 +23,20 @@ public class SimpleBlockingQueueTest {
      */
     @Test
     public void offerAndPollMoreNum() throws InterruptedException {
+
+        Thread customer = new Thread(() -> {
+
+            while (simpleBlockingQueue.size() > 0) {
+                try {
+
+                    simpleBlockingQueue.poll();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        customer.start();
 
         Thread producer = new Thread(() ->
         {
@@ -38,26 +52,10 @@ public class SimpleBlockingQueueTest {
                 }
                 System.out.println(String.format("offer is %s size: %s", num, simpleBlockingQueue.size()));
             }
+            customer.interrupt();
         });
 
-        Thread customer = new Thread(() -> {
-
-            System.out.println(String.format("start customer. Queue: %s", simpleBlockingQueue.size()));
-
-            while (simpleBlockingQueue.size() > 0) {
-                try {
-
-                    System.out.println(String.format("poll is %s size: %s", simpleBlockingQueue.poll(), simpleBlockingQueue.size()));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        customer.start();
         producer.start();
-
-        producer.join();
         customer.join();
 
         assertThat(simpleBlockingQueue.size(), is(0));

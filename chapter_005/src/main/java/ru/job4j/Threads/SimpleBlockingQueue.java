@@ -10,8 +10,8 @@ import java.util.Queue;
  * Class очереди потока на потоконебезопасной коллекции.
  *
  * @author karetskiy
- * @version 1
- * @since 12.10.2018
+ * @version 3
+ * @since 24.10.2018
  */
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
@@ -19,14 +19,7 @@ public class SimpleBlockingQueue<T> {
     /**
      * Максимальный размер очереди.
      */
-    @GuardedBy("this")
     private int sizeMax;
-
-    /**
-     * Переменная для определения заблокирована очередь или нет.
-     */
-    @GuardedBy("this")
-    private boolean isBlocked = false;
 
     /**
      * Хранилище очереди.
@@ -34,26 +27,12 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private final Queue<T> queue = new LinkedList<>();
 
-    @GuardedBy("this")
-    private boolean isFinish = false;
-
     /**
      * Конструктор, при иниилизации устанавливаем максимальный размер очереди.
      * @param sizeMax максимальный размер очереди.
      */
     public SimpleBlockingQueue(int sizeMax) {
         this.sizeMax = sizeMax;
-    }
-
-    public synchronized boolean isFinish() {
-        return isFinish;
-    }
-
-    public void finish() {
-        synchronized(this) {
-            isFinish = true;
-        }
-        Thread.yield();
     }
 
     /**
@@ -67,31 +46,21 @@ public class SimpleBlockingQueue<T> {
     }
 
     /**
-     * Разблокирует (пробуждает) все другие потоки.
-     */
-    private void activationOther() {
-
-        this.isBlocked = false;
-        this.notifyAll();
-    }
-
-    /**
      * Помещаем значение в очередь.
      * @param value помещаемое значение.
      */
     public void offer(T value) throws InterruptedException {
 
         synchronized (this) {
-            while (this.isBlocked) {
+            while (Thread.interrupted()) {
                 System.out.println("wait offer");
                 this.wait();
             }
             if (this.queue.size() <= this.sizeMax) {
                 System.out.println("offer is");
-                this.isBlocked = true;
                 this.queue.offer(value);
             }
-            activationOther();
+            this.notifyAll();
         }
     }
 
@@ -102,13 +71,12 @@ public class SimpleBlockingQueue<T> {
     public T poll() throws InterruptedException {
 
         synchronized (this) {
-            while (this.isBlocked || this.queue.size() == 0) {
+            while (Thread.interrupted() || this.queue.size() == 0) {
                 System.out.println("wait poll");
                 this.wait();
             }
-            this.isBlocked = true;
             T val = queue.poll();
-            activationOther();
+            this.notifyAll();
             return val;
         }
     }

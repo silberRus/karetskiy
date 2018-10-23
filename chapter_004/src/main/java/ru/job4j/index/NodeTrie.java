@@ -11,7 +11,6 @@ import java.util.Set;
  * @author karetskiy
  * @version 1
  * @since 22.07.2018
- * @param <T> тип итератора.
  */
 class NodeTrie {
 

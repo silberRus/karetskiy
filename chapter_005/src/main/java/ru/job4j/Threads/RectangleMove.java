@@ -70,7 +70,7 @@ public class RectangleMove implements Runnable {
             this.rect.setX(x + vectorX * speed);
             this.rect.setY(y + vectorY * speed);
             try {
-                Thread.sleep(50);
+                Thread.sleep(18);
             } catch (InterruptedException e) {
                 return;
             }

@@ -1,54 +1,48 @@
 package ru.job4j.Threads;
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
-
-import java.util.LinkedList;
-import java.util.Queue;
-
+/**
+ * Class теста.
+ * @author karetskiy
+ * @since 24.10.2018
+ * @version 1
+ */
 public class ParallelSearch {
 
+    /**
+     * Точка входа программы. Проверим действие producer -> consumer.
+     * @param args строковые аргументы.
+     */
     public static void main(String[] args) throws InterruptedException {
 
+        /**
+         * Объект связи потоков.
+         */
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<Integer>(50);
+
         final Thread consumer = new Thread(
-                () -> {
-                    //while (!queue.isFinish()) {
-                    while (!Thread.currentThread().isInterrupted()) {
-                        try {
-                            System.out.println(queue.poll());
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                            Thread.currentThread().interrupt();
-                        }
+            () -> {
+                while (true) {
+                    try {
+                        System.out.println(queue.poll());
+                    } catch (InterruptedException e) {
+                        break;
                     }
                 }
+            }
         );
         consumer.start();
-
-        final Thread producer = new Thread(
-                () -> {
-                    for (int index = 0; index != 3; index++) {
-                        try {
-                            queue.offer(index);
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
+        new Thread(
+            () -> {
+                for (int index = 0; index != 3; index++) {
                     try {
-                        queue.finish();
-                    } catch (IllegalMonitorStateException e) {
+                        queue.offer(index);
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-        );
-        producer.start();
-
-        while (producer.isAlive()) {
-
-        }
-        queue.finish();
+                consumer.interrupt();
+            }
+        ).start();
     }
 }
-
