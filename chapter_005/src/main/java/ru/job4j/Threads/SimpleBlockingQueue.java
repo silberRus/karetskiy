@@ -46,6 +46,16 @@ public class SimpleBlockingQueue<T> {
     }
 
     /**
+     * Определяет пустая очередь или нет.
+     * @return true если очередь пустая.
+     */
+    public boolean isEmpty() {
+        synchronized (this) {
+            return size() == 0;
+        }
+    }
+
+    /**
      * Помещаем значение в очередь.
      * @param value помещаемое значение.
      */
