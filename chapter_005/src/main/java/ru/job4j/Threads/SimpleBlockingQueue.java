@@ -17,6 +17,11 @@ import java.util.Queue;
 public class SimpleBlockingQueue<T> {
 
     /**
+     * Флаг говорит что очередь занята.
+     */
+    private boolean block = false;
+
+    /**
      * Максимальный размер очереди.
      */
     private int sizeMax;
@@ -33,6 +38,15 @@ public class SimpleBlockingQueue<T> {
      */
     public SimpleBlockingQueue(int sizeMax) {
         this.sizeMax = sizeMax;
+    }
+
+    /**
+     * Блокирует / разблокирует очередь и будит потоки.
+     * @param enable если true тогда заблокировать, иначе разбудить.
+     */
+    private void doBlock(boolean enable) {
+        this.block = enable;
+        this.notifyAll();
     }
 
     /**
@@ -62,15 +76,16 @@ public class SimpleBlockingQueue<T> {
     public void offer(T value) throws InterruptedException {
 
         synchronized (this) {
-            while (Thread.interrupted()) {
+            while (this.block) {
                 System.out.println("wait offer");
                 this.wait();
             }
+            this.block = true;
             if (this.queue.size() <= this.sizeMax) {
                 System.out.println("offer is");
                 this.queue.offer(value);
             }
-            this.notifyAll();
+            doBlock(false);
         }
     }
 
@@ -81,12 +96,13 @@ public class SimpleBlockingQueue<T> {
     public T poll() throws InterruptedException {
 
         synchronized (this) {
-            while (Thread.interrupted() || this.queue.size() == 0) {
+            while (this.block || Thread.interrupted() || this.queue.size() == 0) {
                 System.out.println("wait poll");
                 this.wait();
             }
+            this.block = true;
             T val = queue.poll();
-            this.notifyAll();
+            doBlock(false);
             return val;
         }
     }
