@@ -1,12 +1,13 @@
 package ru.job4j.nonblock;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Class неблокирующего потокобезопасного кеша.
  * @author karetskiy
- * @since 31.10.2018
- * @version 1
+ * @since 01.11.2018
+ * @version 2
  */
 public class Cache {
 
@@ -18,14 +19,14 @@ public class Cache {
     /**
      * Идентификатор для новых добовляемых объектов.
      */
-    private volatile int id = 0;
+    private volatile AtomicInteger id = new AtomicInteger();
 
     /**
      * Возвращает новую модель с установленным идентификатором.
      * @return новая модель.
      */
     public Base newModel() {
-        return new Base(++id);
+        return new Base(id.incrementAndGet());
     }
 
     /**
