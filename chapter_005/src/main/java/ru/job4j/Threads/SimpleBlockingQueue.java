@@ -10,7 +10,7 @@ import java.util.Queue;
  * Class очереди потока на потоконебезопасной коллекции.
  *
  * @author karetskiy
- * @version 3
+ * @version 4
  * @since 24.10.2018
  */
 @ThreadSafe
@@ -38,6 +38,13 @@ public class SimpleBlockingQueue<T> {
      */
     public SimpleBlockingQueue(int sizeMax) {
         this.sizeMax = sizeMax;
+    }
+
+    /**
+     * Конструктор сразу задает размер очереди по умолчанию.
+     */
+    public SimpleBlockingQueue() {
+        this(42);
     }
 
     /**
