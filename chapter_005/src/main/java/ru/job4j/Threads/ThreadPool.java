@@ -65,8 +65,9 @@ public class ThreadPool {
     /**
      * Останавливает работу пула.
      */
-    public void shutdown() {
+    public void shutdown(){
         running = false;
+        threads.forEach(thread -> notify());
     }
 
     /**
